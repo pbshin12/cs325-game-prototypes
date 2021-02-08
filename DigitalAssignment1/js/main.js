@@ -40,7 +40,7 @@ class MyScene extends Phaser.Scene {
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
         let style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        let text = this.add.text( this.cameras.main.centerX, 15, "Build something amazing.", style );
+        let text = this.add.text( this.cameras.main.centerX, 15, "Digital Assignment 1 Prototype", style );
         text.setOrigin( 0.5, 0.0 );
     }
     
@@ -50,7 +50,7 @@ class MyScene extends Phaser.Scene {
         // in X or Y.
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
-        this.bouncy.rotation = this.physics.accelerateToObject( this.bouncy, this.input.activePointer, 500, 500, 500 );
+        this.bouncy.rotation = this.physics.accelerateToObject( this.bouncy, this.input.activePointer, -500, 500, 500 );
     }
 }
 
