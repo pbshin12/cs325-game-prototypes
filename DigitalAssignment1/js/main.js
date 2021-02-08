@@ -17,6 +17,8 @@ class MyScene extends Phaser.Scene {
         super();
         
         this.bg = null;
+		
+		// this.lazyTimer = 0;
     }
     
     preload() {
@@ -29,6 +31,7 @@ class MyScene extends Phaser.Scene {
 		this.load.audio('reload', ['assets/Audio/pickUp.ogg', 'assets/Audio/pickUp.mp3']);
 		this.load.audio('wind', ['assets/Audio/DesertWindSound.ogg', 'assets/Audio/DesertWindSound.mp3']);
 		this.load.audio('fart', ['assets/Audio/dry-fart.ogg', 'assets/Audio/dry-fart.mp3']);
+		this.load.audio('wrong', ['assets/Audio/wrong.ogg', 'assets/Audio/wrong.mp3']);
 		
     }
     
@@ -46,9 +49,8 @@ class MyScene extends Phaser.Scene {
 		
 		// Listens to keyboard events
 		/* https://rexrainbow.github.io/phaser3-rex-notes/docs/site/keyboardevents/ */
-		this.keyObj = this.input.keyboard.addKey('SPACE');
-		this.isDown = this.keyObj.isDown;
-		this.isUp = this.keyObj.isUp;
+		this.spaceBar = this.input.keyboard.addKey('SPACE');
+		this.rButton = this.input.keyboard.addKey('R');
 		this.shotFired = false; // Ensures that only 1 shot is fired
 		
 		// Sound
@@ -57,18 +59,24 @@ class MyScene extends Phaser.Scene {
 		this.reload = this.sound.add('reload');
 		this.wind = this.sound.add('wind');
 		this.fart = this.sound.add('fart');
+		this.wrong = this.sound.add('wrong');
 		
 		// Should play when the game starts
 		this.reload.play();
 		this.wind.play();
-		this.fart.play();
 		
 		// Obtain random integer
-		//this.randomInt = getRandomInt(20);
+		this.randomInt = this.getRandomInt(5);
+		console.log("Random number: " + this.randomInt);
 		
-		// Timer (with random time)
-		/* https://phaser.io/examples/v2/time/basic-timed-event */
-		//this.time = this.time.events.add(Phaser.Timer.SECOND * this.randomInt, fart, this);
+		// Timer starting from now
+		/* https://phasergames.com/how-to-get-delta-time-in-phaser-3/ */
+		this.start = this.getTime();
+		
+		// Checks if someone farted
+		this.farted = false;
+		
+
 		
 
 		
@@ -81,20 +89,42 @@ class MyScene extends Phaser.Scene {
     
     update() {
 		
-		//TODO --> Hidden timer & sound effect to react
 		
-		// Shooting
-		if (this.keyObj.isDown && !(this.shotFired)) {
+		// If the delta time is greater than a random time (after a minimum of 5 seconds). Call fart method
+		if (this.showDelta() >= ((this.randomInt * 1000) + 5000) && !(this.farted)) {
+			this.fartCall();
+			this.farted = true;
+		}
+		
+		// Shooting if someone farted
+		if (this.spaceBar.isDown && !(this.shotFired) && this.farted) {
 			this.gunShot.play();
 			this.shotFired = true;
+			this.wind.stop();
+		}
+		
+		// Shooting (attempt) if someone did not fart
+		if (this.spaceBar.isDown && !(this.shotFired) && !(this.farted)) {
+			this.wrong.play();
+			this.shotFired = true; // Player can no longer shoot if they shoot early
+		}
+		
+		// Restart
+		if (this.rButton.isDown) {
+			this.reset();
 		}
 		
     }
 	
-	/*
+	
 	// Resets the game
 	reset() {
 		this.shotsFired = false;
+		this.start = this.getTime();
+		this.farted = false;
+		this.wind.stop();
+		console.log("Restarted");
+		this.scene.restart();
 	}
 	
 	// Obtains a random integer between a range from 0 to a max value (inclusive)
@@ -104,10 +134,27 @@ class MyScene extends Phaser.Scene {
 	}
 	
 	// Alerts the player to react (yes... it's a fart sound effect)
-	fart() {
+	fartCall() {
 		this.fart.play();
-	}*/
-
+		console.log("fart method called");
+	}
+	
+	// Return the number of milliseconds since now
+	/* https://phasergames.com/how-to-get-delta-time-in-phaser-3/ */
+	getTime() {
+		let d = new Date();
+		return d.getTime();
+	}
+	
+	// Obtain delta time between time of opening and time right now
+	/* https://phasergames.com/how-to-get-delta-time-in-phaser-3/ */
+	showDelta() {
+		let elapsed = this.getTime() - this.start;
+		
+		// Debug
+		//console.log("deltatime = " + elapsed);
+		return elapsed;
+	}
 
 }
 
