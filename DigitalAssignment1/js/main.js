@@ -87,7 +87,7 @@ class MyScene extends Phaser.Scene {
 		this.start = this.getTime();
 		
 		// Enemy reflex time
-		this.enemyReflex = Phaser.Math.Between(300, 400);
+		this.enemyReflex = Phaser.Math.Between(350, 500);
 		
 		// Checks if someone farted
 		this.farted = false;
