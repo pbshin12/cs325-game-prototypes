@@ -19,72 +19,109 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Digital Assignment 1 (Insert title here)</h2>
+<h2>Digital Assignment 1 - Smelly Standoff</h2>
 
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
+<p> It is a silly game with a silly backstory that brings suspense to the player as they wait for the time to shoot.
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
+<p>There was a lot of time manipulation that was involved in order to create the illusion of random time. This was achieved by calculating the delta time between the time of
+opening the game, to the current time at this moment in real time.
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
 What was the easiest or hardest part of making it?
+<p> The easiest was figuring out what I needed in order to achieve it. The hardest is trying to figure out a way to randomize a timer and translate what I've learned from Unity to Phaser.
+There were many things in Phaser that are frustrating and confusing. The first being that this is my first time coding in Javascript. The second, the interface in Phaser is very different compared to Unity.
+Lastly, I am spoiled by the simple, easy-to-read interface from Unity that I took for granted while using Phaser. I learned that everything must be handwritten in Phaser and people who can make large scale games
+using Phaser are extremely talented, and patient, individuals. I also learned how audio effects work in Phaser.
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
-<li>Bouncing Phaser image: <a href="https://phaser.io/download/logo">Phaser logo</a></li>
+<li>Desert scene: <a href="https://www.deviantart.com/jackarthur909/art/8-Bit-Desert-587514885">Desert Background</a></li>
+<li>Desert wind sound FX: <a href="https://www.youtube.com/watch?v=yOBf00MTAys">Wind sound FX</a></li>
+<li>Reload/click sound FX (I had forgotten where I got it, this was from a previous project of mine): <a href="https://www.freesound.org">Click sound FX</a></li>
+<li>Gunshot sound effect: <a href="https://www.youtube.com/watch?v=iKmaMjesWQc">Click sound FX</a></li>
+<li>Fart sound effect: <a href="https://www.myinstants.com/categories/sound%20effects/">Fart sound FX</a></li>
+<li>Wrong/error sound effect: <a href="https://www.myinstants.com/instant/family-fortunes-wrong-buzzer/">Wrong sound FX</a></li>
 </ul>
+<p>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<p> This game was inspired by a mini game from Kirby: Nightmare in Dreamland where Kirby faces off multiple foes in a standoff.
+<p> Here are the links to the references that I used for this assignment:
+<ul>
+<li>Scaling the background image: <a href="https://phaser.discourse.group/t/how-to-stretch-background-image-on-full-screen/1839">Background Scaling</a></li>
+<li>Keyboard events: <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/keyboardevents/">Keyboard Events</a></li>
+<li>Audio: <a href="https://www.youtube.com/watch?v=COncYQLGJS8">Audio</a></li>
+<li>Getting Delta Time: <a href="https://phasergames.com/how-to-get-delta-time-in-phaser-3/">Delta Time</a></li>
+<li>Random Integer Between Two Numbers: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">Random Int</a></li>
+</ul>
+<p>
 </li>
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
+<p> Two gentlemen fighting for their pride over their embarassing flatulence.
 </li>
 
 <li><strong>Theme:</strong>
 State which of the Storymatic themes you used.
+<p> You can't win with sound off.
 </li>
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
+<p> Keyboard input, a lot of randomness, competitor playstyle, I'm not entirely sure what genre this would fall in, I'll just call it "reflex/quicktime" event.
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
+<p> Mostly how to manipulate time and experiment with user input from the keyboard.
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
+<p> I want players to be in suspense from the environment. They'll never know when they need to fire until it happens, and when they do, they must do it quickly or else they will lose.
 </li>
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<p> During gameplay, the player needs to wait until they hear a fart noise. That is their cue to fire. The enemy, however, also has a reaction time and if the player is too slow, then the enemy will fire and the player will lose.
+The player must press SPACE to fire, but only when the sound goes off. If the player fires too early, their gun will jam and an error sound cue will go off. The player can press R to reset if they so choose.
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
+<p> Always react to the sound, do not anticipate it. Otherwise you will fire too early and jam your gun.
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<p> Once upon a time when cowboys roamed the wild west, two bitter strangers meet each other in the middle of a desert. 
+One of them passed gas and it was very unpleasant and offensive. Both men argued about who dealt it and were so upset that they had decided to do a standoff to see who keeps their pride.
+Cowboys during this time were aggressive and quick to anger. This is a serious matter, at least for them. For now, let's quietly observe them in their natural habitat.
+<p> The sound of the wind and the silence is supposed to represent the building tensions between the two men. One of them will pass, we do not know who, but that will become their cue to fire.
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
+<p> The target audience is intended for all ages 10+.
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
+<p> This game is very short and should take only around 5 - 20 seconds per round.
 </li>
 
 </ul>

@@ -64,7 +64,7 @@ class MyScene extends Phaser.Scene {
 		this.wind.play();
 		
 		// Obtain random integer
-		this.randomInt = this.getRandomInt(5);
+		this.randomInt = this.getRandomInt(10);
 		console.log("Random number: " + this.randomInt);
 		
 		// Timer starting from now
@@ -84,7 +84,7 @@ class MyScene extends Phaser.Scene {
     update() {
 		
 		// If the delta time is greater than a random time (after a minimum of 5 seconds). Call fart method
-		if (this.showDelta() >= ((this.randomInt * 1000) + 5000) && !(this.farted)) {
+		if (this.showDelta() >= ((this.randomInt * 1000) + 6000) && !(this.farted)) {
 			this.fartCall();
 			this.farted = true;
 		}
