@@ -20,8 +20,10 @@ class MyScene extends Phaser.Scene {
     }
     
     preload() {
-        // Load an image and call it 'logo'.
+        // Loading image
         this.load.image( 'bg', 'assets/8bit_Desert.png' );
+		this.load.image('blueSprite', 'assets/blue.png');
+		this.load.image('redSprite', 'assets/red.png');
 		
 		// Loading audio
 		/* https://phaser.io/examples/v3/view/audio/web-audio/play-sound-on-keypress */
@@ -35,7 +37,7 @@ class MyScene extends Phaser.Scene {
     
 	
     create() {
-        
+		
 		// Adds image to the center of the screen
 		// Below is a link to how to correctly scale the image to the screen
 		/* https://phaser.discourse.group/t/how-to-stretch-background-image-on-full-screen/1839 */
@@ -44,6 +46,19 @@ class MyScene extends Phaser.Scene {
 		let scaleY = this.cameras.main.height / this.bg.height;
 		let scale = Math.max(scaleX, scaleY);
 		this.bg.setScale(scale).setScrollFactor(0);
+		
+		// Adding the characters to the screen
+		this.player = this.add.sprite(120, 480, 'blueSprite');
+		this.enemy = this.add.sprite(680, 480, 'redSprite');
+		
+		// Setting and scaling the sprites, tried to match them as close as possible
+		/* https://phasergames.com/scaling-in-phaser-3/ */
+		this.player.setScale(0.1, 0.45);
+		this.enemy.setScale(0.1, 0.28);
+		
+		this.player.setOrigin(0.5, 1);
+		this.enemy.setOrigin(0.5, 1);
+		
 		
 		// Listens to keyboard events
 		/* https://rexrainbow.github.io/phaser3-rex-notes/docs/site/keyboardevents/ */
@@ -71,50 +86,95 @@ class MyScene extends Phaser.Scene {
 		/* https://phasergames.com/how-to-get-delta-time-in-phaser-3/ */
 		this.start = this.getTime();
 		
+		// Enemy reflex time
+		this.enemyReflex = Phaser.Math.Between(260, 400);
+		
 		// Checks if someone farted
 		this.farted = false;
 		
+		// Checks the status of the two characters on screen
+		this.player_isAlive = true;
+		this.player_canShoot = true;
+		this.enemy_isAlive = true;
+		
         // Add some text using a CSS style.
-        // Center it in X, and position its top 15 pixels from the top of the world.
-        let style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        let text = this.add.text( this.cameras.main.centerX, 15, "Digital Assignment 1 Reflex Prototype", style );
-        text.setOrigin( 0.5, 0.0 );
+		let tutorialStyle = { font: "20px Verdana", fill: "#000000", align: "center" };
+		let text = this.add.text( this.cameras.main.centerX, 550, "\"SPACE\" to fire         \"R\" to reset", tutorialStyle );
+		text.setOrigin( 0.5, 0.0 );
     }
     
     update() {
 		
 		// If the delta time is greater than a random time (after a minimum of 5 seconds). Call fart method
-		if (this.showDelta() >= ((this.randomInt * 1000) + 6000) && !(this.farted)) {
+		if (this.showDelta(this.start) >= ((this.randomInt * 1000) + 5000) && !(this.farted)) {
 			this.fartCall();
 			this.farted = true;
+			
 		}
 		
-		// Shooting if someone farted
-		if (this.spaceBar.isDown && !(this.shotFired) && this.farted) {
-			this.gunShot.play();
-			this.shotFired = true;
-			this.wind.stop();
+		// Simulate enemy reflex
+		if (this.farted && this.enemy_isAlive && !(this.shotFired)) {
+			
+			// Enemy fires their gun, their reflex timing varies between 300ms and 500ms
+			if (this.showDelta(this.enemy_time) >= this.enemyReflex) {
+				console.log("Enemy reflex time: " + this.enemyReflex + "ms");
+				this.gunShot.play();
+				this.wind.stop();
+				this.player_isAlive = false;
+				this.shotFired = true;
+				console.log("Player is dead");
+			}
+			
 		}
 		
-		// Shooting (attempt) if someone did not fart
-		if (this.spaceBar.isDown && !(this.shotFired) && !(this.farted)) {
-			this.wrong.play();
-			this.shotFired = true; // Player can no longer shoot if they shoot early
+		// If the player is alive and no shots are fired, the following options are open
+		if (this.player_isAlive && !(this.shotFired) && this.player_canShoot) {
+			// Shooting if someone farted
+			if (this.spaceBar.isDown && this.farted) {
+				this.gunShot.play();
+				this.shotFired = true;
+				this.enemy_isAlive = false; // Dead enemy
+				this.wind.stop();
+				console.log("Enemy is dead");
+			}
+				
+			// Shooting (attempt) if someone did not fart
+			if (this.spaceBar.isDown && !(this.farted)) {
+				this.wrong.play();
+				this.player_canShoot = false; // Player can no longer shoot if they shoot early
+			}
+		}
+		// If player is dead
+		// TODO: YOU LOSE screen
+		if (!(this.player_isAlive) && this.player.angle > -90) {
+			this.player.angle -= 5;
+			// Add some text using a CSS style.
+			let style = { font: "30px Verdana", fill: "#000000", align: "center" };
+			let text = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY, "YOU LOSE\nPress R to reset", style );
+			text.setOrigin( 0.5, 0.0 );
+		}
+		
+		// If enemy is dead
+		// TODO: YOU WIN screen
+		if (!(this.enemy_isAlive) && this.enemy.angle < 90) {
+			this.enemy.angle += 5;
+			
+			// Add some text using a CSS style.
+			let style = { font: "30px Verdana", fill: "##000000", align: "center" };
+			let text = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY, "YOU WIN\nPress R to reset", style );
+			text.setOrigin( 0.5, 0.0 );
 		}
 		
 		// Restart
 		if (this.rButton.isDown) {
+			this.wind.stop();
 			this.reset();
 		}
 		
     }
 	
-	// Resets the game
+	// Resets the game, I do not know if scene reset actually resets all variables in a scene Class
 	reset() {
-		this.shotsFired = false;
-		this.start = this.getTime();
-		this.farted = false;
-		this.wind.stop();
 		console.log("Restarted");
 		this.scene.restart();
 	}
@@ -128,6 +188,7 @@ class MyScene extends Phaser.Scene {
 	// Alerts the player to react (yes... it's a fart sound effect)
 	fartCall() {
 		this.fart.play();
+		this.enemy_time = this.getTime(); // Start the timer for enemy reflex
 		console.log("fart method called");
 	}
 	
@@ -140,8 +201,8 @@ class MyScene extends Phaser.Scene {
 	
 	// Obtain delta time between time of opening and time right now
 	/* https://phasergames.com/how-to-get-delta-time-in-phaser-3/ */
-	showDelta() {
-		let elapsed = this.getTime() - this.start;
+	showDelta(time) {
+		let elapsed = this.getTime() - time;
 		
 		// Debug
 		//console.log("deltatime = " + elapsed);
