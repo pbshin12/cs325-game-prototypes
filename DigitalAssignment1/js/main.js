@@ -11,55 +11,47 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var point2;
-var text;
-
-var angle = 0;
-
-function create ()
-{
-    graphics = this.add.graphics({ lineStyle: { width: 2, color: 0x2266aa } });
-
-    point = new Phaser.Math.Vector2(250, 0);
-    point2 = new Phaser.Math.Vector2(250, 0);
-
-    text = this.add.text(30, 30, '');
-
-    this.input.on('pointermove', function (pointer) {
-        point2.copy(pointer);
-
-        point2.x -= 400;
-        point2.y -= 300;
-    });
-}
-
-function update ()
-{
-    graphics.clear();
-
-    angle += 0.005;
-
-    // vector starting at 0/0
-    point.setTo(Math.cos(angle) * 250, Math.sin(angle) * 250);
-
-    // drawn from the center (as if center was 0/0)
-    graphics.lineBetween(400, 300, 400 + point.x, 300 + point.y);
-
-    graphics.lineStyle(2, 0x00aa00);
-    graphics.lineBetween(400, 300, 400 + point2.x, 300 + point2.y);
-
-    var cross = point.cross(point2);
-
-    var area = point.length() * point2.length();
-
-    var angleBetween = Math.asin(cross / area);
-
-    text.setText([
-        'Cross product: ' + cross,
-        'Normalized cross product: ' + cross / area,
-        'Sinus of the angle between vectors: '+ Phaser.Math.RadToDeg(angleBetween),
-        'Green vector is on the ' + (cross > 0 ? 'right' : 'left')
-    ].join('\n'));
+class MyScene extends Phaser.Scene {
+    
+    constructor() {
+        super();
+        
+        this.bouncy = null;
+    }
+    
+    preload() {
+        // Load an image and call it 'logo'.
+        this.load.image( 'logo', 'assets/phaser.png' );
+    }
+    
+    create() {
+        // Create a sprite at the center of the screen using the 'logo' image.
+        this.bouncy = this.physics.add.sprite( this.cameras.main.centerX, this.cameras.main.centerX, 'logo' );
+        
+        // Make it bounce off of the world bounds.
+        this.bouncy.body.collideWorldBounds = true;
+        
+        // Make the camera shake when clicking/tapping on it.
+        this.bouncy.setInteractive();
+        this.bouncy.on( 'pointerdown', function( pointer ) {
+            this.scene.cameras.main.shake(500);
+            });
+        
+        // Add some text using a CSS style.
+        // Center it in X, and position its top 15 pixels from the top of the world.
+        let style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
+        let text = this.add.text( this.cameras.main.centerX, 15, "Build something amazing.", style );
+        text.setOrigin( 0.5, 0.0 );
+    }
+    
+    update() {
+        // Accelerate the 'logo' sprite towards the cursor,
+        // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
+        // in X or Y.
+        // This function returns the rotation angle that makes it visually match its
+        // new trajectory.
+        this.bouncy.rotation = this.physics.accelerateToObject( this.bouncy, this.input.activePointer, 500, 500, 500 );
+    }
 }
 
 const game = new Phaser.Game({
