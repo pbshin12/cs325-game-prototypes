@@ -17,8 +17,6 @@ class MyScene extends Phaser.Scene {
         super();
         
         this.bg = null;
-		
-		// this.lazyTimer = 0;
     }
     
     preload() {
@@ -76,10 +74,6 @@ class MyScene extends Phaser.Scene {
 		// Checks if someone farted
 		this.farted = false;
 		
-
-		
-
-		
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
         let style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
@@ -88,7 +82,6 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-		
 		
 		// If the delta time is greater than a random time (after a minimum of 5 seconds). Call fart method
 		if (this.showDelta() >= ((this.randomInt * 1000) + 5000) && !(this.farted)) {
@@ -115,7 +108,6 @@ class MyScene extends Phaser.Scene {
 		}
 		
     }
-	
 	
 	// Resets the game
 	reset() {
