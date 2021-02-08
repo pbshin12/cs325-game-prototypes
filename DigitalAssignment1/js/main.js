@@ -25,11 +25,11 @@ class MyScene extends Phaser.Scene {
 		
 		// Loading audio
 		/* https://phaser.io/examples/v3/view/audio/web-audio/play-sound-on-keypress */
-		this.load.audio('gunShot', ['assets/Audio/GunShotSoundEffect.ogg', 'assets/Audio/GunshotSoundEffect.mp3']);
-		this.load.audio('reload', ['assets/Audio/pickUp.ogg', 'assets/Audio/pickUp.mp3']);
-		this.load.audio('wind', ['assets/Audio/DesertWindSound.ogg', 'assets/Audio/DesertWindSound.mp3']);
-		this.load.audio('fart', ['assets/Audio/dry-fart.ogg', 'assets/Audio/dry-fart.mp3']);
-		this.load.audio('wrong', ['assets/Audio/wrong.ogg', 'assets/Audio/wrong.mp3']);
+		this.load.audio('gunShot', ['assets/Audio/GunshotSoundEffect.mp3']);
+		this.load.audio('reload', ['assets/Audio/pickUp.mp3']);
+		this.load.audio('wind', ['assets/Audio/DesertWindSound.mp3']);
+		this.load.audio('fart', ['assets/Audio/dry-fart.mp3']);
+		this.load.audio('wrong', ['assets/Audio/wrong.mp3']);
 		
     }
     
