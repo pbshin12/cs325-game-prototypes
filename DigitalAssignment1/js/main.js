@@ -87,7 +87,7 @@ class MyScene extends Phaser.Scene {
 		this.start = this.getTime();
 		
 		// Enemy reflex time
-		this.enemyReflex = Phaser.Math.Between(260, 400);
+		this.enemyReflex = Phaser.Math.Between(300, 400);
 		
 		// Checks if someone farted
 		this.farted = false;
@@ -145,7 +145,6 @@ class MyScene extends Phaser.Scene {
 			}
 		}
 		// If player is dead
-		// TODO: YOU LOSE screen
 		if (!(this.player_isAlive) && this.player.angle > -90) {
 			this.player.angle -= 5;
 			// Add some text using a CSS style.
@@ -155,7 +154,6 @@ class MyScene extends Phaser.Scene {
 		}
 		
 		// If enemy is dead
-		// TODO: YOU WIN screen
 		if (!(this.enemy_isAlive) && this.enemy.angle < 90) {
 			this.enemy.angle += 5;
 			
