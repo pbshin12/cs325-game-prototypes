@@ -133,9 +133,8 @@ class MyScene extends Phaser.Scene {
         let i = 0;
         while (i <= 7) {
             if (this.done === true) {break;}
-            let randX = Phaser.Math.Between(50, 700);
-            let randY = Phaser.Math.Between(50, 500);
-            this.squirrels.create(randX, randY, 'squirrel');
+            let randX = Phaser.Math.Between(10, 780);
+            this.squirrels.create(randX, 0, 'squirrel');
             i++;
         }
         this.done = true;
