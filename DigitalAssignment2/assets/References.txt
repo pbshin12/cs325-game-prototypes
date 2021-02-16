@@ -1,6 +1,5 @@
 M1 garand - https://shootinjh.com/m1-garand-jackson-hole/
 
-
 How to flip: https://phasergames.com/how-to-flip-a-sprite-in-phaser-3/
 Point sprite toward cursor: https://codepen.io/samme/pen/JjPzaVb?editors=0010
 Group sprites: https://phaser.io/examples/v3/view/game-objects/container/arcade-physics-body-test
@@ -9,4 +8,4 @@ Camera follow sprite: https://phaser.io/examples/v3/view/camera/follow-user-cont
 Containers: https://phaser.io/phaser3/devlog/120
 Phaser.weapon: https://photonstorm.github.io/phaser-ce/Phaser.Weapon.html#fireRate
 Move to cursor while moving: http://labs.phaser.io/view.html?src=src/physics%5Carcade%5Cmove%20to%20pointer.js
-Gunshot - SoundBible.com
+Gunshot - SoundBible.com or freesound.org, I forgot

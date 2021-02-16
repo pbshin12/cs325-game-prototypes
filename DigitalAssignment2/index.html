@@ -24,67 +24,137 @@ body
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
+<p>This game plays around with the warnings that is often seen at zoos and national parks and conjures a ridiculous scenario as to what happens when someone does not adhere to the rules.</p>
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
+<p>The point and shoot mechanic is definitely the highlight of this game. Often times, one would think that a point and shoot game would look simple, but it's a lot of work.
+    There are also elements of careful storage management as spawning multiple projectiles and enemies can slow down the game. I had also implemented a mechanic that increases the game's difficulty by utilizing
+    counter variables in the Update() function to simulate time.
+</p>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
 What was the easiest or hardest part of making it?
+<p>I learned how to make sprites point towards the cursor. Originally, I had made it so that the player can walk around a large map. However, in doing so, the shooting mechanic bugs out because
+    there's a difference between what the game sees versus the relative position of the entire world. The difficult part was trying to understand why the projectiles don't work as expected when
+    the player traverses outside of the (800x600) game environment. Unfortunately, I had given up on fixing the bug as it became extremely complicated. Another notable thing that I learned from this
+    prototype is the concept of containers to group sprites together. The container class enabled me to attach a gun to the player sprite so that both the gun and the player can move as a single unit.
+</p>
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
+<p>Squirrel sprites and player sprite are original and came from my previous works. The background image is a screenshot taken from Genshin Impact</p>
 <ul>
-<li>Bouncing Phaser image: <a href="https://phaser.io/download/logo">Phaser logo</a></li>
+<li>Temmie face: <a href="https://www.kindpng.com/imgv/iJhJiiw_temmie-face-hd-png-download/">Temmie Face</a></li>
+<li>M1 Garand: <a href="https://shootinjh.com/m1-garand-jackson-hole/">M1 Garand</a></li>
+<li>Gunshot (I don't have exact link - was from old project) <a href="https://freesound.org/">Freesound.org</a></li>
+
 </ul>
+<p></p>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<p>
+    I'm not entirely sure what game closely resembles my game, but I did try to recreate some elements from the SAS: Zombie Assault game.
+    The following are the resources that I used to make this game:
+</p>
+<ul>
+<li>How to flip: <a href="https://phasergames.com/how-to-flip-a-sprite-in-phaser-3/">Flip Sprite</a></li>
+<li>Point sprite toward cursor: <a href="https://codepen.io/samme/pen/JjPzaVb?editors=0010">Point toward cursor</a></li>
+<li>Group sprites: <a href="https://phaser.io/examples/v3/view/game-objects/container/arcade-physics-body-test">Group Sprites</a></li>
+<li>Container collision: <a href="https://labs.phaser.io/view.html?src=src%5Cgame%20objects%5Ccontainer%5Carcade%20physics%20body%20test.js">Container Collision</a></li>
+<li>Camera follow sprite (which I chose not to implement due to bugs): <a href="https://phaser.io/examples/v3/view/camera/follow-user-controlled-sprite">Camera Follow</a></li>
+<li>Containers: <a href="https://phaser.io/phaser3/devlog/120">Containers</a></li>
+<li>Move to cursor while moving: <a href="http://labs.phaser.io/view.html?src=src/physics%5Carcade%5Cmove%20to%20pointer.js">Move to cursor</a></li>
+</ul>
+<p></p>
 </li>
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
+<p>The consequences of feeding the wildlife, especially when it comes to squirrels</p>
 </li>
 
 <li><strong>Theme:</strong>
 State which of the Storymatic themes you used.
+<p>
+    National park service ranger
+</p>
 </li>
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
+<p>
+    There are keyboard inputs, but it's mostly mouse. The game also has some element of randomness, but it's only for spawn points.
+    <p>
+        Mouse, deterministic, competitor and achiever (highest kill count), and shooter
+    </p>
+</p>
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
+<p>
+    This prototype is evaluating how to shoot towards the cursor.
+</p>
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
+<p>
+    This game is inteded to make players feel tired from clicking fast. Also, this game tests how fast a player can click and provides feedback on the number of squirrels defeated so that
+    the next time they play, they can beat their previous score.
+</p>
 </li>
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<p>
+    The player can move left and right by pressing buttons A and D, respectfully. To shoot, press the left button on your mouse. The gun is semiautomatic so to fire again, the player would need to click again.
+    However, the rate of fire is dependent on how fast the player can click. The game lasts indefinitely, but the difficulty will increase over time. The main objective of the game is to shoot as many squirrels as possible.
+    When the squirrels touch the player, the game is over and will display the score at the center of the screen. To reset the game, the player can press R.
+</p>
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
+<p>
+    The squirrels will follow the player whenever it spawns. A good strategy would be to sit in a corner so that the squirrels will move in a predicatable direction. Another good strategy would be to "spray" by shooting
+    randomly. However, "spraying" will become less effective the longer the game progresses.
+</p>
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<p>
+    You are a national park service ranger on their first day on the job, congratulations! Your job is to enforce the rule that the visitors of the park should not feed the wildlife. On the branches of the largest tree of the park, the squirrels are plotting a diabolical plan. 
+    For generations, the squirrels have been saving food from the humans in preparation for their quest to dominate the world and declare themselves as the dominant species on Earth. 
+    A pathetic human would think that squirrels are small, furry, and cute. In reality, those small "squirrels" were drones to trick humans into thinking that squirrels are harmless and give food as an offering.
+    Today is the day that the squirrels will begin their attack against humanity. Unfortunately for you, you just so happen to be their first target. How long will you survive against an army of squirrels?
+    <p>
+        The dramatic tension from the story interests with the gameplay tension by having the squirrels attack the player while the player struggles to defend themself.
+    </p>
+</p>
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
+<p>
+    The intended audience for this game is everyon ages 10 and up.
+</p>
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
+<p>
+    Depending on the skill of the player, a single round could take as long as 2 minutes or as short as 20 seconds.
+</p>
 </li>
 
 </ul>
