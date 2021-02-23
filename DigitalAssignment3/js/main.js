@@ -1,5 +1,4 @@
 import "./phaser.js";
-import "./assets.js";
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
@@ -41,7 +40,7 @@ class MyScene extends Phaser.Scene {
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
         let style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        let text = this.add.text( this.cameras.main.centerX, 15, "Hello, Peter Shin", style );
+        let text = this.add.text( this.cameras.main.centerX, 15, "If you're seeing this,\nthat means I have decided to drop this assignment", style );
         text.setOrigin( 0.5, 0.0 );
     }
     

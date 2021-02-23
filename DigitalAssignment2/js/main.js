@@ -40,8 +40,8 @@ class MyScene extends Phaser.Scene {
         // this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
 
         // Audio
-        this.gunShot = this.sound.add('gunShot');
-        this.squeak = this.sound.add('squeak');
+        this.gunShot = this.sound.add('gunShot', {volume: 0.15});
+        this.squeak = this.sound.add('squeak', {volume: 0.25});
         
         this.cameras.main.setBounds(0, 0, 800, 600);
         this.physics.world.setBounds(0, 0, 800, 600);
