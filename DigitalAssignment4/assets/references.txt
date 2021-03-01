@@ -6,3 +6,5 @@ old lady - http://pixelartmaker.com/art/5daf9545090f22b
 explosion sprite sheet - https://1.bp.blogspot.com/-h4gHvGnPfH0/UmFUg1riZlI/AAAAAAAAAFU/FGgUImTIGbU/s640/explosjon3.png
 explosion sound effect - https://www.youtube.com/watch?v=sVqoaO1CezM&feature=emb_title
 flag sprite - https://www.flaticon.com/free-icon/red-flag_395841
+button press sound - https://freesound.org/people/GameAudio/sounds/220206/
+click sound effect - The Hollywood Edge Sound Effects Library

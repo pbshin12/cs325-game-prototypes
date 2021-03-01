@@ -42,8 +42,8 @@ class MyScene extends Phaser.Scene {
         this.physics.add.overlap(this.grandma, this.yellowLaser, this.detonate, null, this);
         this.physics.add.overlap(this.grandma, this.flag, this.goalTouched, null, this);
         
+        this.announcementStyle = { font: "30px Verdana", fill: "#FFFFFF", align: "center" };
 
-        //this.redLaser.disableBody(true, true);
         //this.explosion.play();
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
@@ -57,18 +57,9 @@ class MyScene extends Phaser.Scene {
             this.grandma.x += 0.5;
         }
         
+        this.grandmaPosX = this.grandma.x;
+        this.grandmaPosY = this.grandma.y;
 
-    }
-
-    // Preloads the Image
-    preloadImage() {
-        this.load.image('background', 'assets/forestBG.jpg');
-        this.load.image('black', 'assets/black.jpg');
-        this.load.image('oldLady', 'assets/oldLady.png');
-        this.load.image('redLaser', 'assets/red.jpg');
-        this.load.image('yellowLaser', 'assets/yellow.jpeg');
-        this.load.image('purpleLaser', 'assets/purple.png');
-        this.load.image('flag', 'assets/redFlag.png');
     }
 
     // Creates the background image and scales it to the size of the screen
@@ -89,8 +80,15 @@ class MyScene extends Phaser.Scene {
         this.redButton = this.add.text(50, 550, 'Yellow', {fill: '#ff0000'});
         this.redButton.setInteractive();
         this.redButton.on('pointerdown', () => {
+            this.beep.play();
             if (this.grannyAlive) {
-                this.disableRedLaser();
+                if (this.yellowClickCounter == 2) {
+                    this.disableRedLaser();
+                }
+                else {
+                    this.detonate();
+                }
+                
                 console.log('Red button is pressed'); 
             }
         });
@@ -100,9 +98,15 @@ class MyScene extends Phaser.Scene {
         this.yellowButton = this.add.text(250, 550, 'Yellow', {fill: '#ffff00'});
         this.yellowButton.setInteractive();
         this.yellowButton.on('pointerdown', () => {
+            this.beep.play();
             if (this.grannyAlive) {
                 this.yellowButton.setColor('Green');
                 this.updateYellowClick();
+
+                if (this.yellowClickCounter == 2) {
+                    this.click.play();
+                }
+
                 if (this.yellowClickCounter == 3) {
                     this.disableYellowLaser();
                 }
@@ -116,6 +120,7 @@ class MyScene extends Phaser.Scene {
         this.purpleButton.setInteractive();
         this.physics.add.overlap(this.purpleLaser, this.yellowLaser); // Ensures that the player must disable yellow button first before disabling purple
         this.purpleButton.on('pointerdown', () => {
+            this.beep.play();
             if (this.grannyAlive) {
                 if (!(this.yellowDisabled)) {
                     this.detonate(); // grandma will explode
@@ -127,7 +132,7 @@ class MyScene extends Phaser.Scene {
         });
 
         // MOVE GRANDMA BUTTON
-        this.moveGrandma = this.add.text(650, 540, 'Move\nGrandma').setOrigin(0);
+        this.moveGrandma = this.add.text(570, 540, 'Move\nGrandma').setOrigin(0);
         this.moveGrandma.setInteractive();
         this.moveGrandma.on('pointerdown', () => {
             this.grandmaMoving = true;
@@ -135,11 +140,20 @@ class MyScene extends Phaser.Scene {
         });
 
         // Restart Button
-        //this.restart = this.add.text()
+        this.restart = this.add.text(700, 550, 'Restart').setOrigin(0);
+        this.restart.setInteractive();
+        this.restart.on('pointerdown', () => {
+            this.bgMusic.stop();
+            this.scene.restart();
+            console.log("Scene restart");
+        });
     }
 
     goalTouched() {
         console.log("YOU WIN!");
+        this.announcementText = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY - 25, 
+            "YOU WIN!", this.announcementStyle );
+        this.announcementText.setOrigin(0.5, 0);
     }
 
     detonate() {
@@ -149,6 +163,23 @@ class MyScene extends Phaser.Scene {
         }
         this.grannyAlive = false;
         this.grandma.disableBody(true, true);
+
+        this.explosionAnim = this.add.sprite(this.grandmaPosX - 100, this.grandmaPosY - 100, 'explosion').setOrigin(0);
+        this.explosionAnim.setScale(3);
+        this.anims.create({
+            key: 'explosion_anim',
+            frames: this.anims.generateFrameNumbers("explosion"),
+            frameRate: 10,
+            repeat: 0, // No repeats
+            hideOnComplete: true
+        });
+        this.explosionAnim.play('explosion_anim');
+
+        this.bgMusic.stop();
+
+        this.announcementText = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY - 25, 
+            "Grandma exploded and it's all your fault\nGAME OVER", this.announcementStyle );
+        this.announcementText.setOrigin(0.5, 0);
     }
 
     // Records click counter for yellow button
@@ -163,7 +194,7 @@ class MyScene extends Phaser.Scene {
 
     // Disables yellow laser
     disableYellowLaser() {
-        this.yellowLaser.body.disableBody(true, true);
+        this.yellowLaser.disableBody(true, true);
         this.yellowDisabled = true;
     }
 
@@ -201,10 +232,28 @@ class MyScene extends Phaser.Scene {
 
     }
 
+        // Preloads the Image
+    preloadImage() {
+        this.load.image('background', 'assets/forestBG.jpg');
+        this.load.image('black', 'assets/black.jpg');
+        this.load.image('oldLady', 'assets/oldLady.png');
+        this.load.image('redLaser', 'assets/red.jpg');
+        this.load.image('yellowLaser', 'assets/yellow.jpeg');
+        this.load.image('purpleLaser', 'assets/purple.png');
+        this.load.image('flag', 'assets/redFlag.png');
+
+        this.load.spritesheet('explosion', 'assets/explosion3.png', {
+            frameWidth: 128,
+            frameHeight: 128
+        });
+    }
+
     // Preloads the Audio
     preloadAudio() {
         this.load.audio('bgMusic', ['assets/hitman-by-kevin-macleod-from-filmmusic-io.mp3']);
         this.load.audio('explosion', ['assets/explosion.mp3']);
+        this.load.audio('beep', ['assets/beep.mp3']);
+        this.load.audio('click', ['assets/bigClick.mp3']);
 
     }
 
@@ -212,6 +261,8 @@ class MyScene extends Phaser.Scene {
     addAudio() {
         this.bgMusic = this.sound.add('bgMusic', {volume: 0.30});
         this.explosion = this.sound.add('explosion', {volume: 0.75});
+        this.beep = this.sound.add('beep', {volume: 0.75});
+        this.click = this.sound.add('click', {volume: 0.75});
     }
 }
 
