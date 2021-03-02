@@ -259,7 +259,7 @@ class MyScene extends Phaser.Scene {
 
     // Adds audio to a variable
     addAudio() {
-        this.bgMusic = this.sound.add('bgMusic', {volume: 0.30});
+        this.bgMusic = this.sound.add('bgMusic', {volume: 0.15});
         this.explosion = this.sound.add('explosion', {volume: 0.75});
         this.beep = this.sound.add('beep', {volume: 0.75});
         this.click = this.sound.add('click', {volume: 0.75});
