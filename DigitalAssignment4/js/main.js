@@ -27,6 +27,7 @@ class MyScene extends Phaser.Scene {
 
         this.grannyAlive = true; // Checks if grandma is alive
         this.grandmaMoving = false; // Moves grandma to the end
+        this.win = false;
 
         this.createBackground();
         this.addAudio();
@@ -85,6 +86,7 @@ class MyScene extends Phaser.Scene {
                 if (this.yellowClickCounter == 2) {
                     this.disableRedLaser();
                 }
+                else if (this.win) {} // Do nothing (prevents grandma from detonating after winning)
                 else {
                     this.detonate();
                 }
@@ -154,6 +156,7 @@ class MyScene extends Phaser.Scene {
         this.announcementText = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY - 25, 
             "YOU WIN!", this.announcementStyle );
         this.announcementText.setOrigin(0.5, 0);
+        this.win = true;
     }
 
     detonate() {
