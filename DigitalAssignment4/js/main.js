@@ -53,7 +53,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-        if (this.grandmaMoving && this.grannyAlive) {
+        if (this.grandmaMoving && this.grannyAlive && this.grandma.x < 800) {
             this.grandma.x += 0.5;
         }
         
