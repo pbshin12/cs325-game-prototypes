@@ -36,8 +36,8 @@ class MyScene extends Phaser.Scene {
 
         this.text = this.add.text(20, 40, '', { font: '16px monospace', fill: 'violet' });
 
-        // this.cameras.main.setBounds(0, 0, 1920 * 2, 1080 * 2);
-        // this.physics.world.setBounds(0, 0, 1920 * 2, 1080 * 2);
+        this.cameras.main.setBounds(0, 0, 800, 600);
+        this.physics.world.setBounds(0, 0, 800, 600);
 
         // Audio
         this.gunShot = this.sound.add('gunShot', {volume: 0.15});
@@ -92,6 +92,9 @@ class MyScene extends Phaser.Scene {
         this.mouse = this.input;
         this.leftClick = this.input.mousePointer;
         
+        let canvas = this.sys.canvas;
+        canvas.style.cursor = 'none';
+
         // Adding in crosshair after mouse is added
         this.crossHair = this.add.image(this.mouse.x, this.mouse.y, 'crosshair').setOrigin(0.5, 0.5);
         this.crossHair.setScale(0.25);
@@ -218,49 +221,12 @@ class MyScene extends Phaser.Scene {
             //this.container.body.setVelocity(0, 0);
             // Player movement --> Moves in all 8 directions --> Update: Now moves in 2 directions: left and right
             if (this.A.isDown) {
-                //this.container.body.setVelocity(-300, 0);
                 this.container.x -= 3;
-                // if (this.S.isDown) {
-                //     this.container.body.setVelocity(-300, 300);
-                // }
-                // else if (this.W.isDown) {
-                //     this.container.body.setVelocity(-300, -300);
-                // }
+  
             }
-            if (this.D.isDown) {
-                //this.container.body.setVelocity(300, 0);
+            else if (this.D.isDown) {
                 this.container.x += 3;
-                // if (this.S.isDown) {
-                //     this.container.body.setVelocity(300, 300);
-                // }
-                // else if (this.W.isDown) {
-                //     this.container.body.setVelocity(300, -300);
-                // }
             }
-            // else if (this.S.isDown) {
-            //     this.container.body.setVelocity(0, 300);
-            // }
-            // else if (this.W.isDown) {
-            //     this.container.body.setVelocity(0, -300);
-            // }
-            // else {
-            //     this.container.body.setVelocity(0, 0);
-            // }
-
-            // if(this.W.isUp && this.A.isUp && this.S.isUp && this.D.isUp) {
-            //     this.container.body.setVelocity(0, 0);
-            // }
-
-            // if (!(this.firedOnce) && this.leftClick.isDown) {
-            //     this.fire(this.angleUpdate);
-            //     this.firedOnce = true;
-            // }
-
-            // if (this.leftClick.isDown && this.control >= 50) {
-            //     this.fire(this.angleUpdate);
-            // }
-            
-            // this.control++;
 
             if (this.leftClick.isDown && !(this.fired)) {
                 this.fire(this.angleUpdate);
