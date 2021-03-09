@@ -40,8 +40,8 @@ class MyScene extends Phaser.Scene {
         this.lives = 3;
         this.score = 0;
         this.captured = 0;
-        this.dogSpawnRate = 15000; // 15 seconds to spawn a dog
-        this.trashSpawnRate = 3000; // 3 seconds to spawn trash
+        this.dogSpawnRate = 10000; // Dog spawns every 10 seconds
+        this.trashSpawnRate = 3000; // Trash spawn every 3 seconds
         
         // Box Position
         this.boxPosition = 2;
