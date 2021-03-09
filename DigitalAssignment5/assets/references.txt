@@ -6,3 +6,10 @@ some random pixel man - https://www.pixilart.com/draw/pixel-guy-e41a0370c4fa699
 annoying dog - https://www.reddit.com/r/Undertale/comments/fkl1fh/an_annoying_dog_appeared/
 trash - https://www.pngkit.com/bigpic/u2t4r5w7e6w7i1y3/
 ding - https://www.youtube.com/watch?v=qZC5gtOw3DU
+
+
+movement control: https://phaser.io/tutorials/making-your-first-phaser-3-game/part9
+
+timer event: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
+canceling gravity: https://phaser.discourse.group/t/canceling-gravity-on-a-specific-object/2854
+music - https://www.youtube.com/watch?v=9hzxHeIq1LQ&t=1s
