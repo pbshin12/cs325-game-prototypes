@@ -19,67 +19,70 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Peter's Digital Assignment 4: Don't Explode Granny (Please read instructions at the bottom)</h2>
+<h2>Peter's Digital Assignment 5: Community Service</h2>
 
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
-<p>This game is a puzzle game that tests how well a player can follow instructions. Any wrong inputs will cause grandma to explode, which is essentially a more intense version of Simon Says</p>
+<p>This game is a collection game with a twist, you can only collect items with a box and touching items without the box will hurt you.
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
-<p>The lasers have a specific condition which were manipulated by using different functions that work together.</p>
+<p>I had implemented an improved version of tracking time from my second prototype by utilizing the time event function from Phaser. Also, this game is more involved because there are a total of 7 keys to press (4 to move, and 3 to rotate the box)</p>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
 What was the easiest or hardest part of making it?
-<p>What I learned from this prototype is how javascript handles functions when passed as an argument. The hardest part of making this is figuring out how to make the game more exciting than just simply adding random lasers and disabling them with a button. 
-    So my solution was to make this game a puzzle.</p>
+<p>Keeping track of what I am doing was definitely the hardest part of making it. There's a lot going on in this game and pulling everything together was quite a challenge. Other than that, I learned how to implement the time event function from the Phaser 3 API and was able to use two for this project.
+</p>
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <p></p>
 <ul>
-<li>Forest Background: <a href="https://www.youtube.com/watch?v=Ic3ZdD5ko7k">Background</a></li>
-<li>Old Lady: <a href="http://pixelartmaker.com/art/5daf9545090f22b">Old Lady</a></li>
+<li>Park Background: <a href="https://www.istockphoto.com/illustrations/pixels-park">Background</a></li>
+<li>Some Random Pixel Man: <a href="https://www.pixilart.com/draw/pixel-guy-e41a0370c4fa699">Pixel Man</a></li>
 <li>Explosion Sprite Sheet: <a href="https://1.bp.blogspot.com/-h4gHvGnPfH0/UmFUg1riZlI/AAAAAAAAAFU/FGgUImTIGbU/s640/explosjon3.png">Explosion Sprite Sheet</a></li>
-<li>Flag Sprite: <a href="https://www.flaticon.com/free-icon/red-flag_395841">Flag Sprite</a></li>
+<li>Annoying Dog (Undertale): <a href="https://www.reddit.com/r/Undertale/comments/fkl1fh/an_annoying_dog_appeared/">Dog</a></li>
 <li>Explosion Sound Effect: <a href="https://www.youtube.com/watch?v=sVqoaO1CezM&feature=emb_title">Explosion</a></li>
-<li>Button Press Sound Effect: <a href="https://freesound.org/people/GameAudio/sounds/220206/">Button Press Effect</a></li>
-<li>Click Sound Effect from The Hollywood Edge Sound Effects Library (I do not have a link)</li>
-<p></p>
+<li>Ding Sound Effect: <a href="https://www.youtube.com/watch?v=qZC5gtOw3DU">Ding Sound Effect</a></li>
+<li>Minecraft OOF: <a href="https://www.youtube.com/watch?v=0T_NR2KY8uI">Minecraft OoF</a></li>
+<li>Music: <a href="https://www.youtube.com/watch?v=9hzxHeIq1LQ&t=1s">Music</a></li>
+
+<p>The rest were from my previous, personal projects.</p>
 </ul>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
-<p>I cannot remember the exact name of this game, but there is a game where you are working at an office where you have to
-    defuse bombs for a living. In that game, you were given a set of instructions and you have to make sure you cut the correct wires. If you incorrectly cut the wires in the wrong
-    order, the bomb will explode and the game will be over.
+<p>
+    This game derives from Phaser's "build your first game" tutorial, but 90% of this prototype was made from scratch. I remember a scene from Undertale where the player has to rotate a shield to block spears and I took inspiration from that idea.
 </p>
 <ul>
-<li>Sprite Animations Tutorial: <a href="https://www.youtube.com/watch?v=hkedWHfU_oQ">Sprite Animation</a></li>
+<li>Movement: <a href="https://phaser.io/tutorials/making-your-first-phaser-3-game/part9">Movement</a></li>
+<li>Timer Event: <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/">Time Event</a></li>
+<li>Canceling Gravity: <a href="https://phaser.discourse.group/t/canceling-gravity-on-a-specific-object/2854">Cancel Gravity</a></li>
 </ul>
 <p>The rest were either made from scratch, pulled from Phaser documentation, or were pulled from my previous works</p>
 </li>
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
-<p>Disable the lasers safely or else grandma will explode</p>
+<p>Collect all the trash and save the dogs while avoiding getting hit</p>
 </li>
 
 <li><strong>Theme:</strong>
 State which of the Storymatic themes you used.
-<p>Elderly Person</p>
+<p>Cleaning, round and round</p>
 </li>
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
-<p>The input for this game is mostly indirect and uses clickable buttons to control the hazards and instruct the grandma to move.
-    There is no randomness and it is mostly deterministic. The play style is director (you control whether you want grandma to move) and this game is a puzzle.
+<p>The input for this game is mostly direct and uses arrow keys to move and WAD keys to rotate the box/bin (however you call it).
+    There is some randomness when it comes to spawn locations, but it is mostly deterministic on the player's side. The play style is collector and, depending on how you look at it, it's kind of a platformer or maybe even fighting (but that's stretching it). For now I'll leave it as platformer.
 </p>
 </li>
 
@@ -90,38 +93,31 @@ What game mechanic is this prototype evaluating?
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
-<p>I want players to think carefully before making their decision</p>
+<p>I want players to be challenged by an unique form of the collecting mechanic.</p>
 </li>
 
 <li><strong>Gameplay (INSTRUCTIONS ARE LOCATED HERE):</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
-<p>The main controls for this game are just buttons where players can click on them to activate certain events. As part of this game, there will be a set of instructions and the player needs to carefully read over the instructions or else they will lose.
-    When the player thinks that everything is safe, they will press the "Move Grandma" button to move the grandma to the goal post. If the grandma touches a laser, she will explode. Otherwise, if the grandma reaches the end, the player wins.
+<p>
+    The main controls are the arrow keys and WAD. Both the left and right arrow keys will move the character left and right and the up key will make the player jump. W will put the box to the left, D will but the box to the right, and W will place the box above the character's head.
+    When you capture a dog, you can take the dog to the shelter (for now the shelter is the Black box on the right side of the screen). When you've successfully catch trash with the box, you'll earn 10 points. If you've captured a dog, it'll increment the captured counter, but when you return the dog to the shelter, you'll receive 50 x the amount of dogs that you return.
+    Players should be mindful that the dogs can spawn from either direction. A hit from either a trash bag or a dog will decrease the number of captured dogs by a half.
 </p>
 <p>
-    THIS IS THE MANUAL THAT IS PART OF THE GAME:
-    <ul>
-        <li>If purple laser touches yellow laser, do not disable purple laser</li>
-        <li>The rightmost laser does nothing</li>
-        <li>If the yellow button turns green after 1 press, press it two more times to disable the yellow laser</li>
-        <li>The button controlling the red laser is the yellow button, but in red</li>
-        <li>Only on the second press of the yellow button can you safely disable the red laser</li>
-        <li>Do not touch the red button after disabling the red laser</li>
-    </ul>
 </p>
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
-<p>There is no time limit (so far) in this game. So players should take their time and slowly read through the instructions and not jump to conclusions</p>
+<p>I will expect some players to realize that, due to the odd nature of hitboxes in this game (I couldn't figure out the fix), it is much safer to catch the trash by placing the box on its side since it is longer when its vertically oriented.</p>
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
-<p>In a dark forest, a lost grandma is trying to return back to her home. However, there is a science experiment going on, which involve dangerous lasers and explosions, and you are the only person who can operate on the laser machine. 
-    Unfortunately, the only available manual for the machine is a crumbly, old piece of paper that contains some broad instructions.
-    <p>The scenario for this game is tense game because a single mistake will cause the grandma to explode. The player needs to read the instructions carefully</p>
+<p>
+    It appears to be just your regular day at work cleaning the park and ensuring the safety of its visitors when all of a sudden, a rocket that was meant to carry garbage to space exploded, dropping all of the trash and debris toward the park. Amidst the chaos, dogs were also escaping from their owners and its your job to take them to a nearby shelter so that they are safe.
+    <p>The scenario for this game coincides with the gameplay because the whole point of the game is to collect falling debris and capturing the escapees and sending them to somewhere safe</p>
 </p>
 </li>
 
