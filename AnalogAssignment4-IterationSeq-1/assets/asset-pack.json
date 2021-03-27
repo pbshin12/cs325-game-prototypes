@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/BlueCircle.png",
+                "type": "image",
+                "key": "BlueCircle"
+            },
+            {
                 "url": "assets/dino.png",
                 "type": "image",
                 "key": "dino"
@@ -10,6 +15,11 @@
                 "url": "assets/Level.js",
                 "type": "sceneFile",
                 "key": "Level"
+            },
+            {
+                "url": "assets/RedCircle.png",
+                "type": "image",
+                "key": "RedCircle"
             }
         ]
     },
