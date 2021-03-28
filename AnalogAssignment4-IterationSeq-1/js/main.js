@@ -137,7 +137,7 @@ class Tutorial extends Phaser.Scene
             if (this.wizard.x >= 1100)
             {
                 this.necromancer.x += 3;
-                this.time.delayedCall(1200, () => this.scene.start('mainScene'));
+                this.time.delayedCall(1500, () => this.scene.start('mainScene'));
             }
         }
     }
@@ -163,10 +163,23 @@ class MainScene extends Phaser.Scene
         this.load.image('wizard', 'assets/Wizard.png');
         this.load.image('necromancer', 'assets/skeletonSoldier.png');
         this.load.image('bg', 'assets/forestBackground.jpg');
+        this.load.image('station', 'assets/WhiteCircle.png');
+
+        this.load.audio("bossMusic2", 'assets/Part2.mp3');
     }
 
     create()
     {
+        this.game.sound.stopAll();
+        this.cameras.main.fadeIn(200, 0, 0, 0);
+        this.createControls();
+        this.bossMusic = this.sound.add('bossMusic2', {volume: 0.35});
+        this.bossMusic.play();
+        this.bossMusic.repeat = true;
+        // Stations
+        this.stationArray = [];
+        this.numberOfStations = 5;
+
         /* https://labs.phaser.io/edit.html?src=src/camera/follow%20user%20controlled%20sprite.js&v=3.54.0 */
         this.cameras.main.setBounds(0, 0, 474 * 2, 474 * 2);
         this.physics.world.setBounds(0, 0, 474 * 2, 474 * 2);
@@ -176,21 +189,125 @@ class MainScene extends Phaser.Scene
         this.add.image(474, 0, 'bg').setOrigin(0).setFlipX(true);
         this.add.image(0, 474, 'bg').setOrigin(0).setFlipY(true);
         this.add.image(474, 474, 'bg').setOrigin(0).setFlipX(true).setFlipY(true);
-
-
-        this.cameras.main.fadeIn(200, 0, 0, 0);
-        this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
-        this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
         
-        this.createControls();
-
+        // Creating station objects. This is where advanced stuff happens
+        for (var i = 0; i < 5; i++)
+        {
+            let station = {
+                station: i+1, 
+                percent: 0,
+                entity: null, 
+                filled: false,
+                placeStation: function(self, x, y, player) {
+                    this.entity = self.physics.add.image(x, y, 'station').setOrigin(0.5).setScale(0.15);
+                }
+            };
+            this.stationArray.push(station);
+        }
+        // Place stations
+        this.stationArray[0].placeStation(this, 175, 474);
+        this.station1_Text = this.add.text(this.stationArray[0].entity.x, this.stationArray[0].entity.y, `${this.stationArray[0].percent.toFixed(1)}%` ,{font: "15px Comic Sans MS", fill: '#000000'}).setOrigin(0.5);
+        this.stationArray[1].placeStation(this, 474, 75);
+        this.station2_Text = this.add.text(this.stationArray[1].entity.x, this.stationArray[1].entity.y, `${this.stationArray[1].percent.toFixed(1)}%` ,{font: "15px Comic Sans MS", fill: '#000000'}).setOrigin(0.5);
+        this.stationArray[2].placeStation(this, 775, 474);
+        this.station3_Text = this.add.text(this.stationArray[2].entity.x, this.stationArray[2].entity.y, `${this.stationArray[2].percent.toFixed(1)}%` ,{font: "15px Comic Sans MS", fill: '#000000'}).setOrigin(0.5);
+        this.stationArray[3].placeStation(this, 474, 875);
+        this.station4_Text = this.add.text(this.stationArray[3].entity.x, this.stationArray[3].entity.y, `${this.stationArray[3].percent.toFixed(1)}%` ,{font: "15px Comic Sans MS", fill: '#000000'}).setOrigin(0.5);
+        this.stationArray[4].placeStation(this, 474, 474);
+        this.station5_Text = this.add.text(this.stationArray[4].entity.x, this.stationArray[4].entity.y, `${this.stationArray[4].percent.toFixed(1)}%` ,{font: "15px Comic Sans MS", fill: '#000000'}).setOrigin(0.5);
+        
         this.player = this.physics.add.image(100, 200, 'wizard').setOrigin(0.5);
         this.player.setCollideWorldBounds(true);
         this.player.setScale(0.05);
 
+        // Probably my worst code yet
+        this.physics.add.overlap(this.player, this.stationArray[0].entity, this.chargeStation_1, null, this);
+        this.physics.add.overlap(this.player, this.stationArray[1].entity, this.chargeStation_2, null, this);        
+        this.physics.add.overlap(this.player, this.stationArray[2].entity, this.chargeStation_3, null, this);        
+        this.physics.add.overlap(this.player, this.stationArray[3].entity, this.chargeStation_4, null, this);        
+        this.physics.add.overlap(this.player, this.stationArray[4].entity, this.chargeStation_5, null, this);        
+        
+        this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
+        this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
+
         this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
         this.cameras.main.setZoom(1.25);
+
+        
     }
+
+    chargeStation_1(player, entity)
+    {
+
+        if (this.stationArray[0].filled === false) {
+            this.stationArray[0].percent += 0.20;
+            console.log("Charging station1: " + this.stationArray[0].percent);
+        }
+        if (this.stationArray[0].percent >= 100) {
+            this.stationArray[0].percent = 100;
+            this.stationArray[0].filled = true;
+            console.log("Station1 is fully charged!");
+        }
+
+        this.station1_Text.setText(`${this.stationArray[0].percent.toFixed(1)}%`);
+    }
+
+    chargeStation_2(player, entity)
+    {
+        if (this.stationArray[1].filled === false) {
+            this.stationArray[1].percent += 0.20;
+            console.log("Charging station1: " + this.stationArray[1].percent);
+        }
+        if (this.stationArray[1].percent >= 100) {
+            this.stationArray[1].percent = 100;
+            this.stationArray[1].filled = true;
+            console.log("Station2 is fully charged!");
+        }
+        this.station2_Text.setText(`${this.stationArray[1].percent.toFixed(1)}%`);
+    }
+
+    chargeStation_3(player, entity)
+    {
+        if (this.stationArray[2].filled === false) {
+            this.stationArray[2].percent += 0.20;
+            console.log("Charging station3: " + this.stationArray[2].percent);
+        }
+        if (this.stationArray[2].percent >= 100) {
+            this.stationArray[2].percent = 100;
+            this.stationArray[2].filled = true;
+            console.log("Station3 is fully charged!");
+        }
+        this.station3_Text.setText(`${this.stationArray[2].percent.toFixed(1)}%`);
+    }
+
+    chargeStation_4(player, entity)
+    {
+        if (this.stationArray[3].filled === false) {
+            this.stationArray[3].percent += 0.20;
+            console.log("Charging station4: " + this.stationArray[3].percent);
+        }
+        if (this.stationArray[3].percent >= 100) {
+            this.stationArray[3].percent = 100;
+            this.stationArray[3].filled = true;
+            console.log("Station4 is fully charged!");
+        }
+        this.station4_Text.setText(`${this.stationArray[3].percent.toFixed(1)}%`);
+    }
+
+    chargeStation_5(player, entity)
+    {
+        if (this.stationArray[4].filled === false) {
+            this.stationArray[4].percent += 0.20;
+            console.log("Charging station5: " + this.stationArray[4].percent);
+        }
+        if (this.stationArray[4].percent >= 100) {
+            this.stationArray[4].percent = 100;
+            this.stationArray[4].filled = true;
+            console.log("Station5 is fully charged!");
+        }
+        this.station5_Text.setText(`${this.stationArray[4].percent.toFixed(1)}%`);
+    }
+
 
     update()
     {
