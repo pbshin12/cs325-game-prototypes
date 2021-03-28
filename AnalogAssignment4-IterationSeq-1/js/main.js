@@ -166,6 +166,7 @@ class MainScene extends Phaser.Scene
         this.load.image('station', 'assets/WhiteCircle.png');
 
         this.load.audio("bossMusic2", 'assets/Part2.mp3');
+        this.load.audio("magicSoundFX", 'assets/Magic Sound Effects.mp3');
     }
 
     create()
@@ -176,6 +177,7 @@ class MainScene extends Phaser.Scene
         this.bossMusic = this.sound.add('bossMusic2', {volume: 0.35});
         this.bossMusic.play();
         this.bossMusic.repeat = true;
+        this.magicActivation = this.sound.add('magicSoundFX');
         // Stations
         this.stationArray = [];
         this.numberOfStations = 5;
@@ -226,14 +228,40 @@ class MainScene extends Phaser.Scene
         this.physics.add.overlap(this.player, this.stationArray[2].entity, this.chargeStation_3, null, this);        
         this.physics.add.overlap(this.player, this.stationArray[3].entity, this.chargeStation_4, null, this);        
         this.physics.add.overlap(this.player, this.stationArray[4].entity, this.chargeStation_5, null, this);        
-        
+
         this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
         this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
 
-        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+        this.station1Sound = false;
+        this.station2Sound = false;
+        this.station3Sound = false;
+        this.station4Sound = false;
+        this.station5Sound = false;
+
+        this.stationCheck_Counter = 0;
+
+        this.necromancer = this.physics.add.image(950, 950, 'necromancer').setOrigin(0.5).setScale(0.5);
+        this.necromancerSpeed = 35; // Starts off slow, but progressively becomes faster
+        
+        
+
+        this.physics.add.overlap(this.player, this.necromancer, this.killPlayer, null, this);
+        this.time.delayedCall(1000, () => this.necromancer.setSize(150, 500, true));
+        this.time.delayedCall(1000, () => this.player.setSize(300, 450, true));
+        this.cameras.main.startFollow(this.necromancer, true, 0.50, 0.50);
         this.cameras.main.setZoom(1.25);
 
+        this.time.delayedCall(2000, () => this.cameras.main.startFollow(this.player, true, 0.50, 0.50));
         
+
+        
+    }
+
+    killPlayer()
+    {
+        this.playerAlive = false;
+        console.log("Player is dead");
+        this.scene.start('lose');
     }
 
     chargeStation_1(player, entity)
@@ -241,12 +269,17 @@ class MainScene extends Phaser.Scene
 
         if (this.stationArray[0].filled === false) {
             this.stationArray[0].percent += 0.20;
-            console.log("Charging station1: " + this.stationArray[0].percent);
         }
         if (this.stationArray[0].percent >= 100) {
             this.stationArray[0].percent = 100;
             this.stationArray[0].filled = true;
-            console.log("Station1 is fully charged!");
+            if (!this.station1Sound) 
+            {
+                this.magicActivation.play();
+                this.station1Sound = true;
+                this.necromancerSpeed += 50;
+                this.stationCheck_Counter++;
+            }
         }
 
         this.station1_Text.setText(`${this.stationArray[0].percent.toFixed(1)}%`);
@@ -254,14 +287,20 @@ class MainScene extends Phaser.Scene
 
     chargeStation_2(player, entity)
     {
+
         if (this.stationArray[1].filled === false) {
             this.stationArray[1].percent += 0.20;
-            console.log("Charging station1: " + this.stationArray[1].percent);
         }
         if (this.stationArray[1].percent >= 100) {
             this.stationArray[1].percent = 100;
             this.stationArray[1].filled = true;
-            console.log("Station2 is fully charged!");
+            if (!this.station2Sound) 
+            {
+                this.magicActivation.play();
+                this.station2Sound = true;
+                this.necromancerSpeed += 50;
+                this.stationCheck_Counter++;
+            }
         }
         this.station2_Text.setText(`${this.stationArray[1].percent.toFixed(1)}%`);
     }
@@ -270,12 +309,17 @@ class MainScene extends Phaser.Scene
     {
         if (this.stationArray[2].filled === false) {
             this.stationArray[2].percent += 0.20;
-            console.log("Charging station3: " + this.stationArray[2].percent);
         }
         if (this.stationArray[2].percent >= 100) {
             this.stationArray[2].percent = 100;
             this.stationArray[2].filled = true;
-            console.log("Station3 is fully charged!");
+            if (!this.station3Sound) 
+            {
+                this.magicActivation.play();
+                this.station3Sound = true;
+                this.necromancerSpeed += 50;
+                this.stationCheck_Counter++;
+            }
         }
         this.station3_Text.setText(`${this.stationArray[2].percent.toFixed(1)}%`);
     }
@@ -284,12 +328,18 @@ class MainScene extends Phaser.Scene
     {
         if (this.stationArray[3].filled === false) {
             this.stationArray[3].percent += 0.20;
-            console.log("Charging station4: " + this.stationArray[3].percent);
         }
         if (this.stationArray[3].percent >= 100) {
             this.stationArray[3].percent = 100;
             this.stationArray[3].filled = true;
-            console.log("Station4 is fully charged!");
+            if (!this.station4Sound) 
+            {
+                this.magicActivation.play();
+                this.station4Sound = true;
+                this.necromancerSpeed += 50;
+                this.stationCheck_Counter++;
+                
+            }
         }
         this.station4_Text.setText(`${this.stationArray[3].percent.toFixed(1)}%`);
     }
@@ -298,12 +348,17 @@ class MainScene extends Phaser.Scene
     {
         if (this.stationArray[4].filled === false) {
             this.stationArray[4].percent += 0.20;
-            console.log("Charging station5: " + this.stationArray[4].percent);
         }
         if (this.stationArray[4].percent >= 100) {
             this.stationArray[4].percent = 100;
             this.stationArray[4].filled = true;
-            console.log("Station5 is fully charged!");
+            if (!this.station5Sound) 
+            {
+                this.magicActivation.play();
+                this.station5Sound = true;
+                this.necromancerSpeed += 50;
+                this.stationCheck_Counter++;
+            }
         }
         this.station5_Text.setText(`${this.stationArray[4].percent.toFixed(1)}%`);
     }
@@ -312,7 +367,15 @@ class MainScene extends Phaser.Scene
     update()
     {
 
+        if (this.stationCheck_Counter === 5)
+        {
+            this.enemyAlive = false;
+            this.scene.start('victory');
+        }
+
+        currentScene = this;
         this.player.setVelocity(0);
+        this.physics.moveToObject(this.necromancer, this.player, this.necromancerSpeed);
 
         if (this.cursors.left.isDown)
         {
@@ -333,6 +396,15 @@ class MainScene extends Phaser.Scene
         {
             this.player.setVelocityY(250);
         }
+
+        if (this.player.x < this.necromancer.x)
+        {
+            this.necromancer.flipX = true;
+        }
+        else
+        {
+            this.necromancer.flipX = false;
+        }
     }
 
     // Creates the controls
@@ -343,6 +415,153 @@ class MainScene extends Phaser.Scene
         this.A = this.input.keyboard.addKey('A');
         this.S = this.input.keyboard.addKey('S');
         this.D = this.input.keyboard.addKey('D');
+    }
+
+}
+
+class Lose extends Phaser.Scene
+{
+    spaceCounter = 0;
+
+    constructor()
+    {
+        super('lose');
+    }
+
+    preload()
+    {
+        this.load.image('wizard', 'assets/Wizard.png');
+        this.load.image('necromancer', 'assets/skeletonSoldier.png');
+
+        this.load.audio('bossMusic', ["assets/8-Bit RPG Music - Boss Battle Original Composition.mp3"]);
+        this.space = this.input.keyboard.addKey('SPACE');
+    }
+
+    create()
+    {
+        this.gameStart = false;
+        this.style1 = {font: "65px Comic Sans MS", fill: '#FF0000', align: "center"};
+        this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
+        this.style3 = {font: "20px Comic Sans MS", fill: '#ffffff', align: "center"};
+        this.cameras.main.setBackgroundColor('#000000');
+        
+        this.bossMusic = this.sound.add('bossMusic', { volume: 0.35 });
+
+        TweenHelper.flashElement(this, this.screenText);
+        this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, "YOU LOSE", this.style1).setOrigin(0.5,0.5);
+
+        this.wizard = this.add.image(this.cameras.main.centerX + 250, 450, 'wizard').setOrigin(0.5).setScale(0.15);
+        this.necromancer = this.add.image(100, 450, 'necromancer').setOrigin(0.5).setScale(0.35);
+        this.necromancer.setSize(10, 10, true);      
+
+        this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Return to Title Screen', this.style2).setOrigin(0.5);
+        TweenHelper.flashElement(this, this.screenText);
+        
+
+        this.tutorialText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, this.tutorial, this.style3).setOrigin(0.5);
+        this.musicPlayed = false;
+    }
+
+    update()
+    {
+        currentScene = this;
+        
+
+        if (this.space.isDown)
+        {
+            this.gameStart = true;
+
+            if (this.musicPlayed === false)
+            {
+                this.game.sound.stopAll();
+                this.scene.start('title');
+            }
+            
+            
+        }
+
+        if (this.gameStart === true)
+        {
+            this.wizard.x += 2;
+            
+            if (this.wizard.x >= 1100)
+            {
+                this.necromancer.x += 3;
+                this.time.delayedCall(1500, () => this.scene.start('mainScene'));
+            }
+        }
+    }
+
+}
+
+class Victory extends Phaser.Scene
+{
+    spaceCounter = 0;
+
+    constructor()
+    {
+        super('victory');
+    }
+
+    preload()
+    {
+        this.load.image('wizard', 'assets/Wizard.png');
+        this.load.image('necromancer', 'assets/skeletonSoldier.png');
+
+        this.load.audio('bossMusic', ["assets/8-Bit RPG Music - Boss Battle Original Composition.mp3"]);
+        this.space = this.input.keyboard.addKey('SPACE');
+    }
+
+    create()
+    {
+        this.gameStart = false;
+        this.style1 = {font: "65px Comic Sans MS", fill: '#ffff00', align: "center"};
+        this.style2 = {font: "25px Comic Sans MS", fill: '#ffff00', align: "center"};
+        this.style3 = {font: "20px Comic Sans MS", fill: '#ffffff', align: "center"};
+        this.cameras.main.setBackgroundColor('#000000');
+        
+        this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, "YOU WIN!!", this.style1).setOrigin(0.5,0.5);
+
+        this.wizard = this.add.image(this.cameras.main.centerX + 250, 450, 'wizard').setOrigin(0.5).setScale(0.15);
+        this.necromancer = this.add.image(100, 450, 'necromancer').setOrigin(0.5).setScale(0.35);
+        this.necromancer.setSize(10, 10, true);      
+
+        this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Return to Title Screen', this.style2).setOrigin(0.5);
+        TweenHelper.flashElement(this, this.screenText);
+        
+
+        this.tutorialText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, this.tutorial, this.style3).setOrigin(0.5);
+        this.musicPlayed = false;
+    }
+
+    update()
+    {
+        currentScene = this;
+        
+
+        if (this.space.isDown)
+        {
+            this.gameStart = true;
+
+            if (this.musicPlayed === false)
+            {
+                this.game.sound.stopAll();
+                this.scene.start('title');
+            }
+            
+            
+        }
+
+        if (this.gameStart === true)
+        {
+            this.wizard.x += 2;
+            
+            if (this.wizard.x >= 1100)
+            {
+                this.necromancer.x += 3;
+                this.time.delayedCall(1500, () => this.scene.start('mainScene'));
+            }
+        }
     }
 
 }
@@ -395,6 +614,7 @@ const game = new Phaser.Game({
     parent: 'game',
     width: 800,
     height: 600,
-    scene: [Title, Tutorial, MainScene],
-    physics: { default: 'arcade' },
+    scene: [Title, Tutorial, MainScene, Lose, Victory],
+    physics: { default: 'arcade',
+                arcade: {debug: true} },
     });
