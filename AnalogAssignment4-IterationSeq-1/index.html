@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Digital Assignment 5</title>
+<title>Analog Assign 4 Iteration Seq 1</title>
 <style>
 body
 {
@@ -19,23 +19,23 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Peter's Digital Assignment 5: Chaotic Community Service</h2>
+<h2>Peter's Analog Assignment 4 Iteration Sequence 1: Yutnori for Wizards... Kinda</h2>
 
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
-<p>This game is a collection game with a twist, you can only collect items with a box and touching items without the box will hurt you.
+<p>This game was inspired by the traditional Korean board game called "Yutnori" which involves taking your pieces around the board and make it back to the start point (kind of like baseball). However, I took it upon myself to interpret the story behind it and made each station like a charging station. Which, afterwards, inspired me to make this game about a wizard who charges a magical station to defeat a villian. I also wanted to make an arcade-like game, so I tried to make it seem like a typical arcade game. </p>
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
-<p>I had implemented an improved version of tracking time from my second prototype by utilizing the time event function from Phaser. Also, this game is more involved because there are a total of 7 keys to press (4 to move, and 3 to rotate the box)</p>
+<p>A lot of objects were used in the making of this project. Each station in the game is its own individual object where you can retrieve certain data such as their charge percentage, colliders, and other data. I had also experimented with scene transition and managed to produce a tutorial scene, that way I do not have to explain to my classmates the instructions.</p>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
 What was the easiest or hardest part of making it?
-<p>Keeping track of what I am doing was definitely the hardest part of making it. There's a lot going on in this game and pulling everything together was quite a challenge. Other than that, I learned how to implement the time event function from the Phaser 3 API and was able to use two for this project.
+<p>The hardest for me was bringing all the objects together and provide me the correct data when a player collides on a station. I wanted each station to charge up when a player stands on it, but it was extremely difficult to find methods to directly take an overlap function inside of an object. So I had to hardcode each station's characteristics. Otherwise, I learned a lot about developing on different scenes and scene transitions.
 </p>
 </li>
 
@@ -43,14 +43,11 @@ What was the easiest or hardest part of making it?
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <p></p>
 <ul>
-<li>Park Background: <a href="https://www.istockphoto.com/illustrations/pixels-park">Background</a></li>
-<li>Some Random Pixel Man: <a href="https://www.pixilart.com/draw/pixel-guy-e41a0370c4fa699">Pixel Man</a></li>
-<li>Explosion Sprite Sheet: <a href="https://1.bp.blogspot.com/-h4gHvGnPfH0/UmFUg1riZlI/AAAAAAAAAFU/FGgUImTIGbU/s640/explosjon3.png">Explosion Sprite Sheet</a></li>
-<li>Annoying Dog (Undertale): <a href="https://www.reddit.com/r/Undertale/comments/fkl1fh/an_annoying_dog_appeared/">Dog</a></li>
-<li>Explosion Sound Effect: <a href="https://www.youtube.com/watch?v=sVqoaO1CezM&feature=emb_title">Explosion</a></li>
-<li>Ding Sound Effect: <a href="https://www.youtube.com/watch?v=qZC5gtOw3DU">Ding Sound Effect</a></li>
-<li>Minecraft OOF: <a href="https://www.youtube.com/watch?v=0T_NR2KY8uI">Minecraft OoF</a></li>
-<li>Music: <a href="https://www.youtube.com/watch?v=9hzxHeIq1LQ&t=1s">Music</a></li>
+<li>Title music: <a href="https://www.youtube.com/watch?v=TNYTFOiNO4s">Title Music</a></li>
+<li>Boss Music: <a href="https://www.youtube.com/watch?v=NzFKyZc_va4">Boss Battle</a></li>
+<li>Forest Background: <a href="https://opengameart.org/content/trees-bushes">Background</a></li>
+<li>Wizard: <a href="https://www.pixilart.com/art/pixel-wizard-144103346d5d3aa">Wizard</a></li>
+<li>Magic Sound Effect: <a href="https://www.youtube.com/watch?v=O5Y1QGG0q90">Magic Sound Effect</a></li>
 
 <p>The rest were from my previous, personal projects.</p>
 </ul>
@@ -59,49 +56,46 @@ Did you make your prototype assets from scratch? Did you borrow them? Cite your 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
 <p>
-    This game derives from Phaser's "build your first game" tutorial, but 90% of this prototype was made from scratch. I remember a scene from Undertale where the player has to rotate a shield to block spears and I took inspiration from that idea.
+    I'm not entirely sure what this closely resembles. This is probably one of the few games that I had an original idea on. I guess one could say it's sort of like typical wargames where you capture the flag by defending a post.
 </p>
 <ul>
-<li>Movement: <a href="https://phaser.io/tutorials/making-your-first-phaser-3-game/part9">Movement</a></li>
+<li>Follow Player: <a href="https://labs.phaser.io/edit.html?src=src/camera/follow%20user%20controlled%20sprite.js&v=3.54.0">Follow Player</a></li>
 <li>Timer Event: <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/">Time Event</a></li>
-<li>Canceling Gravity: <a href="https://phaser.discourse.group/t/canceling-gravity-on-a-specific-object/2854">Cancel Gravity</a></li>
+<li>Flashing Text Example: <a href="https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/">Flashing Text</a></li>
 </ul>
 <p>The rest were either made from scratch, pulled from Phaser documentation, or were pulled from my previous works</p>
 </li>
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
-<p>Collect all the trash and save the dogs while avoiding getting hit</p>
+<p>Charge up all stations to defeat the necromancer!</p>
 </li>
 
 <li><strong>Theme:</strong>
 State which of the Storymatic themes you used.
-<p>Cleaning, round and round</p>
+<p>N/a</p>
 </li>
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
-<p>The input for this game is mostly direct and uses arrow keys to move and WAD keys to rotate the box/bin (however you call it).
-    There is some randomness when it comes to spawn locations, but it is mostly deterministic on the player's side. The play style is collector and, depending on how you look at it, it's kind of a platformer or maybe even fighting (but that's stretching it). For now I'll leave it as platformer.
+<p>The input for this game is mostly direct and uses arrow keys to move. The game is mostly deterministic. The play style is in between explorer and collector. You explore to find each station, and you collect them by charging them up. The genre is probably overhead since this is from the top-down view.
 </p>
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
-<p>I wanted to see how well a player can follow instructions and also how to make intricate parts of the puzzle communicate with each other</p>
+<p>I wanted to see if the station charging mechanic works and if the presence of the necromancer will make things stressful/put more pressure on the players.</p>
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
-<p>I want players to be challenged by an unique form of the collecting mechanic.</p>
+<p>I want players to feel pressured by the presence of something chasing them.</p>
 </li>
 
-<li><strong>Gameplay (INSTRUCTIONS ARE LOCATED HERE):</strong>
+<li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
 <p>
-    The main controls are the arrow keys and WAD. Both the left and right arrow keys will move the character left and right and the up key will make the player jump. W will put the box to the left, D will but the box to the right, and W will place the box above the character's head.
-    When you capture a dog, you can take the dog to the shelter (for now the shelter is the Black box on the right side of the screen). When you've successfully catch trash with the box, you'll earn 10 points. If you've captured a dog, it'll increment the captured counter, but when you return the dog to the shelter (repesented as a BLACK box), you'll receive 50x the amount of dogs that you return.
-    Players should be mindful that the dogs can spawn from either direction. A hit from either a trash bag or a dog will decrease the number of captured dogs by a half.
+    Players can move their character around using the arrow keys. The objective of this prototype game is to activate all magic stations while also avoiding contact with the necromancer. The difficulty actually increases each time the player completes charging a station. So anyone who plays this game should plan their path wisely.
 </p>
 <p>
 </p>
@@ -109,15 +103,15 @@ A paragraph describing the actions the player can perform, the system dynamics, 
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
-<p>I will expect some players to realize that, due to the odd nature of hitboxes in this game (I couldn't figure out the fix), it is much safer to catch the trash by placing the box on its side since it is longer when its vertically oriented.</p>
+<p>At the beginning, the necromancer is pretty slow. This is the best opportunity to charge the center station and it is best to charge the middle station first. Otherwise, it will be extremely difficult. Afterwards, slowly charge the rest of them, just barely before fully charged. Then when you're ready, run around in a circle. If done right, you should be able to activate all stations as you run by them.</p>
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
 <p>
-    It appears to be just your regular day at work cleaning the park and ensuring the safety of its visitors when all of a sudden, a rocket that was meant to carry garbage to space exploded, dropping all of the trash and debris toward the park. Amidst the chaos, dogs were also escaping from their owners and its your job to take them to a nearby shelter so that they are safe.
-    <p>The scenario for this game coincides with the gameplay because the whole point of the game is to collect falling debris and capturing the escapees and sending them to somewhere safe</p>
+    The prophecy has come true. The pure evil that is the Necromancer has returned to destroy the world. The only way to destroy such evil is through the powers of the divine artifacts that are the magic stations. Do not let the Necromancer touch you, he has the hands of death and a single touch can instantly kill a man. Unfortunately for you, the Necromancer had heard the news that you were going to charge them and is coming after you!
+    <p>The scenario for this game coincides with the gameplay because it creates pressure on the player to try and avoid the Necromancer. I did design him to be menacing and annoying during gameplay.</p>
 </p>
 </li>
 
