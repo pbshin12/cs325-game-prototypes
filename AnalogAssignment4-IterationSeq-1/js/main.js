@@ -12,319 +12,210 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-class MyScene extends Phaser.Scene {
-    
-    constructor() {
-        super();
+let currentScene;
+
+class Title extends Phaser.Scene
+{
+    constructor()
+    {
+        super('title');
     }
-    
-    preload() {
-        this.preloadImage();
-        this.preloadAudio();
+
+    preload()
+    {
+        this.load.image('wizard', 'assets/Wizard.png');
+        this.load.image('necromancer', 'assets/skeletonSoldier.png');
+        this.load.image('dog', 'assets/annoyingDog.png');
+        this.load.audio('theme', ["assets/8-Bit RPG Music - The Heroine's Theme Original Composition.mp3"]);
+        this.load.audio('confirmation', ['assets/UIConfirmation.mp3']);
+
+        this.space = this.input.keyboard.addKey('SPACE');
     }
-    
-    create() {
-        this.createBackground();
-        this.createButtons();
-        this.addAudio();
-        this.addImage();
+
+    create()
+    {
+        this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
+        this.style2 = {font: "80px Comic Sans MS", fill: '#ffcc00', align: "center"};
+        this.cameras.main.setBackgroundColor('#000000');
+        this.themeMusic = this.sound.add('theme', {volume: 0.15});
+        this.themeMusic.play();
+        this.themeMusic.loop = true;
+        this.confirmation = this.sound.add('confirmation');
+
+        this.screenText = this.add.text(425, 400, 'Press Space to Play', this.style2).setOrigin(0.5);
+        TweenHelper.flashElement(this, this.screenText);
+        this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 200, "Yutnori for Wizards... Kinda", this.style1).setOrigin(0.5,0.5);
+
+        this.add.image(this.cameras.main.centerX, 250, 'wizard').setOrigin(0.5).setScale(0.15);
+        this.necromancer = this.add.image(100, 575, 'necromancer').setOrigin(0.5).setScale(0.35);
+        this.necromancer.angle -= 30;
+    }
+
+    update()
+    {
+        currentScene = this;
+
+        if (this.space.isDown)
+        {
+            this.confirmation.play();
+            currentScene.scene.start('tutorial');
+        }
+    }
+
+}
+
+class Tutorial extends Phaser.Scene
+{
+    spaceCounter = 0;
+
+    constructor()
+    {
+        super('tutorial');
+    }
+
+    preload()
+    {
+        this.load.image('wizard', 'assets/Wizard.png');
+        this.load.image('necromancer', 'assets/skeletonSoldier.png');
+
+        this.load.audio('bossMusic', ["assets/8-Bit RPG Music - Boss Battle Original Composition.mp3"]);
+        this.space = this.input.keyboard.addKey('SPACE');
+    }
+
+    create()
+    {
+        this.gameStart = false;
+        this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
+        this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
+        this.style3 = {font: "20px Comic Sans MS", fill: '#ffffff', align: "center"};
+        this.cameras.main.setBackgroundColor('#000000');
+        
+        this.bossMusic = this.sound.add('bossMusic', { volume: 0.35 });
+
+        this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Play', this.style2).setOrigin(0.5);
+        TweenHelper.flashElement(this, this.screenText);
+        this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 255, "Tutorial", this.style1).setOrigin(0.5,0.5);
+
+        this.wizard = this.add.image(this.cameras.main.centerX + 250, 450, 'wizard').setOrigin(0.5).setScale(0.15);
+        this.necromancer = this.add.image(100, 450, 'necromancer').setOrigin(0.5).setScale(0.35);
+
+        this.tutorial = "\n\n\n\nYou are a wizard fighting a formidable villian: the Necromancer!\nTo defeat him, you must harness the power of the magic stations located around the map.\nBut you must charge them with your own magic.\nHowever, the Necromancer has heard of the sacred magic stations\nand is coming to capture you before you could charge them!\n\n\n\n\nArrow keys to move\n\nStand on top of any station to charge it\n\nDo not let him touch you!";
+        
+
+        this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Play', this.style2).setOrigin(0.5);
+        TweenHelper.flashElement(this, this.screenText);
+        this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 255, "Tutorial", this.style1).setOrigin(0.5,0.5);
+
+        this.tutorialText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, this.tutorial, this.style3).setOrigin(0.5);
+        this.musicPlayed = false;
+    }
+
+    update()
+    {
+        currentScene = this;
+        
+
+        if (this.space.isDown)
+        {
+            this.gameStart = true;
+
+            if (this.musicPlayed === false)
+            {
+                this.game.sound.stopAll();
+                this.bossMusic.play();
+                this.bossMusic.repeat = true;
+                this.musicPlayed = true;
+            }
+            
+            
+        }
+
+        if (this.gameStart === true)
+        {
+            this.wizard.x += 2;
+            
+            if (this.wizard.x >= 1100)
+            {
+                this.necromancer.x += 3;
+                this.time.delayedCall(1200, () => this.scene.start('mainScene'));
+            }
+        }
+    }
+
+}
+
+class MainScene extends Phaser.Scene
+{
+    playerDirection = 1; // 1 is right, 0 is left
+    playerAlive = true;
+    enemyAlive = true;
+    enemyHealth = 100;
+    enemyDirection = 1;
+    playerHealth = 3; // Can take 3 hits, or one hit?
+
+    constructor()
+    {
+        super('mainScene');
+    }
+
+    preload()
+    {
+        this.load.image('wizard', 'assets/Wizard.png');
+        this.load.image('necromancer', 'assets/skeletonSoldier.png');
+        this.load.image('bg', 'assets/forestBackground.jpg');
+    }
+
+    create()
+    {
+        /* https://labs.phaser.io/edit.html?src=src/camera/follow%20user%20controlled%20sprite.js&v=3.54.0 */
+        this.cameras.main.setBounds(0, 0, 474 * 2, 474 * 2);
+        this.physics.world.setBounds(0, 0, 474 * 2, 474 * 2);
+
+        // Mashing 4 images together to create one big background
+        this.add.image(0, 0, 'bg').setOrigin(0);
+        this.add.image(474, 0, 'bg').setOrigin(0).setFlipX(true);
+        this.add.image(0, 474, 'bg').setOrigin(0).setFlipY(true);
+        this.add.image(474, 474, 'bg').setOrigin(0).setFlipX(true).setFlipY(true);
+
+
+        this.cameras.main.fadeIn(200, 0, 0, 0);
+        this.style1 = {font: "65px Comic Sans MS", fill: '#0066ff', align: "center"};
+        this.style2 = {font: "25px Comic Sans MS", fill: '#ffcc00', align: "center"};
+        
         this.createControls();
 
-        this.bgMusic.play();
-        this.bgMusic.loop = true;
+        this.player = this.physics.add.image(100, 200, 'wizard').setOrigin(0.5);
+        this.player.setCollideWorldBounds(true);
+        this.player.setScale(0.05);
 
-        this.physics.add.collider(this.player, this.ground);
-        this.physics.world.setBounds(-30, 0, 860, 600);
-        this.playerAlive = true; // Checks if player is alive
-
-        this.lives = 3;
-        this.score = 0;
-        this.captured = 0;
-        this.dogSpawnRate = 10000; // Dog spawns every 10 seconds
-        this.trashSpawnRate = 3000; // Trash spawn every 3 seconds
-        
-        // Box Position
-        this.boxPosition = 2;
-        this.boxIsUp = false;
-
-        this.gameStart = true;
-        this.scoreText = this.add.text(16, 16, `score: ${this.score}`, {fontSize: '32px', fill: '#FFFFFF'});
-        this.capturedText = this.add.text(16, 64, `captured: ${this.captured}`, {fontSize: '32px', fill: '#FFFFFF'});
-        this.healthText = this.add.text(16, 120, `HEALTH: ${this.lives}`, {fontSize: '32px', fill: '#FFFFFF'});
-
- 
-
-        this.dogs = this.physics.add.group();
-        this.garbage = this.physics.add.group(); // Trash should pass through the ground
-
-        // timer event - https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
-        this.dogSpawnTimer = this.time.addEvent({
-            delay: this.dogSpawnRate,
-            callback: this.spawnDog,
-            callbackScope: this,
-            loop: true
-        });
-
-        this.trashSpawnTimer = this.time.addEvent({
-            delay: this.trashSpawnRate,
-            callback: this.spawnTrash,
-            callbackScope: this,
-            loop: true
-        });
-
-        this.physics.add.overlap(this.player, this.shelter, this.returnDog, null, this);
-        
-        this.announcementStyle = { font: "30px Verdana", fill: "#FFFFFF", align: "center" };
-
-        this.playerPosX = this.player.x;
-        this.playerPosY = this.player.y;
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+        this.cameras.main.setZoom(1.25);
     }
-    
-    update() {
-        this.playerPosX = this.player.x;
-        this.playerPosY = this.player.y;
 
-        /* Movement control - https://phaser.io/tutorials/making-your-first-phaser-3-game/part7 */
+    update()
+    {
+
+        this.player.setVelocity(0);
+
         if (this.cursors.left.isDown)
         {
-            this.player.setVelocityX(-300) * this.delta;
-        
-            this.player.flipX = false;
+            this.player.setVelocityX(-250);
+            this.player.flipX = true;
         }
         else if (this.cursors.right.isDown)
         {
-            this.player.setVelocityX(300) * this.delta;
-        
-            this.player.flipX = true;
+            this.player.setVelocityX(250);
+            this.player.flipX = false;
         }
-        else
+
+        if (this.cursors.up.isDown)
         {
-            this.player.setVelocityX(0);
+            this.player.setVelocityY(-250);
         }
-        
-        if (this.cursors.up.isDown && this.player.body.touching.down)
+        else if (this.cursors.down.isDown)
         {
-            this.player.setVelocityY(-500);
+            this.player.setVelocityY(250);
         }
-
-        if (this.W.isDown)
-        {
-            this.boxPosition = 1; // box perpendicular on top
-        }
-        else if (this.D.isDown)
-        {
-            this.boxPosition = 2; // box on the right
-        }
-        else if (this.A.isDown)
-        {
-            this.boxPosition = 3; // box on the left
-        }
-
-
-        switch(this.boxPosition)
-        {
-            case 1:
-                this.boxIsUp ? this.box.setPosition(this.player.x, this.player.y - 90) : this.boxUp();
-                break;
-            case 2:
-                this.box.setPosition(this.player.x + 70, this.player.y);
-                this.boxDown();
-                break;
-            case 3:
-                this.box.setPosition(this.player.x - 70, this.player.y);
-                this.boxDown();
-                break;
-        }
-
-    }
-
-    // Rotates the box if it is up
-    boxUp()
-    {
-        this.boxIsUp = true;
-        this.box.angle = 90;
-    }
-
-    // Rotates the box if it is down
-    boxDown()
-    {
-        this.boxIsUp = false;
-        this.box.angle = 0;
-    }
-
-    setDogCollider(dog)
-    {
-        this.physics.add.overlap(this.box, dog, this.captured_Dog, null, this);
-        this.physics.add.overlap(this.player, dog, this.hitPlayer_Dog, null, this);
-    }
-    // Spawns Dog
-    spawnDog()
-    {
-        console.log("Attempting to spawn dog, this.gameStart = " + this.gameStart);
-        if (this.gameStart)
-        {
-            console.log("HOIIIIIII");
-            let randInt = Phaser.Math.Between(1, 2);
-            console.log("Random Int for Dog: " + randInt);
-            let dog = null;
-            switch (randInt)
-            {
-                case 1:
-                    dog = this.dogs.create(0, 530, 'dog').setOrigin(0.5, 0.5).setVelocityX(200).setScale(0.45).refreshBody();
-                    dog.body.setAllowGravity(false);
-                    dog.flipX = true;
-                    break;
-                case 2:
-                    dog = this.dogs.create(900, 530, 'dog').setOrigin(0.5, 0.5).setVelocityX(-200).setScale(0.45).refreshBody();
-                    dog.body.setAllowGravity(false);
-                    break;
-            }
-            this.setDogCollider(dog);
-            this.dogs.children.iterate(function(dog) {
-                if (dog.x < -110 || dog.x > 910)
-                {
-                    dog.disableBody(true, true);
-                    console.log("Dog destroyed");
-                }
-            });
-            console.log("Dog spawned HOIIIIIIIIIIIII");
-        }
-    }
-
-    // Initializes colliders for trash
-    setTrashCollider(trash)
-    {
-        this.physics.add.collider(trash, this.ground, this.destroyGarbage, null, this); // Destroys garbage that are out of bounds (literally garbage-handling the data)
-        this.physics.add.overlap(this.box, trash, this.collectTrash, null, this);
-        this.physics.add.overlap(this.player, this.garbage, this.hitPlayer_Trash, null, this);
-    }
-    // Spawns Trash
-    spawnTrash()
-    {
-        console.log("Attempting to spawn TRASH, this.gameStart = " + this.gameStart);
-        if (this.gameStart)
-        {
-            let randInt = Phaser.Math.Between(100, 700);
-            console.log("Random Int for Trash: " + randInt);
-            let trash = this.garbage.create(randInt, 50, 'trash').setOrigin(0.5, 0.5).setVelocityY(150).setScale(0.075);
-            this.setTrashCollider(trash);
-            this.dogs.children.iterate(function(dog) {
-                if (dog.x < -110 || dog.x > 910)
-                {
-                    dog.disableBody(true, true);
-                    console.log("Dog destroyed");
-                }
-            });
-            console.log("Trash spawned HOIIIIIIIIIIIII");
-        }
-    }
-
-    destroyGarbage(garbage, ground)
-    {
-        garbage.disableBody(true, true);
-    }
-
-    // Collect trash
-    collectTrash(player, trash) {
-        console.log("Trash collected");
-        this.confirmation.play();
-        trash.disableBody(true, true);
-        this.score += 10;
-        this.scoreText.setText('score: ' + this.score);
-    }
-
-    hitPlayer_Trash(player, trash)
-    {
-        console.log("Player is hit by trash");
-        this.oof.play();
-        this.ouch.play();
-
-        trash.disableBody(true, true);
-        this.captured = Math.floor(this.captured / 2); // Player loses half of captured dogs
-        this.lives--;
-        this.capturedText.setText('captured: ' + this.captured);
-        this.healthText.setText('HEALTH: ' + this.lives);
-
-        if (this.lives <= 0)
-        {
-            this.detonate();
-        }
-        else
-        {
-            this.oof.play();
-            this.ouch.play();
-        }
-    }
-
-    // Capture dog
-    captured_Dog(box, dog)
-    {
-        console.log("DOG CAPTURED");
-        this.squeak.play();
-        dog.disableBody(true, true);
-        this.captured++;
-        this.capturedText.setText('captured: ' + this.captured);
-    }
-
-    // Returning the dog to the shelter will reward players with 5 times the normal point amount
-    returnDog(player, shelter)
-    {
-        if (this.captured > 0)
-        {
-            let totalPoints = 50 * this.captured;
-            this.score += totalPoints;
-            this.captured = 0;
-            this.scoreText.setText('score: ' + this.score);
-            this.capturedText.setText('captured: ' + this.captured);
-            this.ding.play();
-        }
-
-        
-    }
-
-    hitPlayer_Dog(player, dog)
-    {
-        console.log("Player is hit by dog");
-        
-        dog.disableBody(true, true);
-        this.captured = Math.floor(this.captured / 2); // Player loses half of captured dogs
-        this.lives--;
-        this.capturedText.setText('captured: ' + this.captured);
-        this.healthText.setText('HEALTH: ' + this.lives);
-
-        if (this.lives <= 0)
-        {
-            this.detonate();
-        }
-        else
-        {
-            this.oof.play();
-            this.ouch.play();
-        }
-    }
-
-    // Creates the background image and scales it to the size of the screen
-    createBackground() {
-        // Adds image to the center of the screen
-		// Below is a link to how to correctly scale the image to the screen
-		/* https://phaser.discourse.group/t/how-to-stretch-background-image-on-full-screen/1839 */
-		this.bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background');
-		let scaleX = this.cameras.main.width / this.bg.width;
-		let scaleY = (this.cameras.main.height / this.bg.height) + 0.5;
-		let scale = Math.max(scaleX, scaleY);
-		this.bg.setScale(scale).setScrollFactor(0);
-    }
-
-    // Creates buttons
-    createButtons() {
-        // Restart Button
-        this.restart = this.add.text(690, 20, 'Restart', {font: "30px Comic Sans", fill: '#000000'}).setOrigin(0);
-        this.restart.setInteractive();
-        this.restart.on('pointerdown', () => {
-            this.bgMusic.stop();
-            this.scene.restart();
-            console.log("Scene restart");
-        });
     }
 
     // Creates the controls
@@ -333,102 +224,52 @@ class MyScene extends Phaser.Scene {
 
         this.W = this.input.keyboard.addKey('W');
         this.A = this.input.keyboard.addKey('A');
-        //this.S = this.input.keyboard.addKey('S');
+        this.S = this.input.keyboard.addKey('S');
         this.D = this.input.keyboard.addKey('D');
     }
 
-    detonate() {
-        console.log("BOOOOOM YOU DIED, YOU FAILED");
-        if (this.playerAlive) {
-            this.explosion.play();
+}
+
+/* This code is taken from this source: https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/ */
+export default class TweenHelper {
+    static flashElement(scene, element, repeat = true, easing = 'Linear', overallDuration = 500, visiblePauseDuration = 500) {
+        if (scene && element) {
+            let flashDuration = overallDuration - visiblePauseDuration / 2;
+
+            scene.tweens.timeline({
+                tweens: [
+                    {
+                        targets: element,
+                        duration: 0,
+                        alpha: 0,
+                        ease: easing
+                    },
+                    {
+                        targets: element,
+                        duration: flashDuration,
+                        alpha: 1,
+                        ease: easing
+                    },
+                    {
+                        targets: element,
+                        duration: visiblePauseDuration,
+                        alpha: 1,
+                        ease: easing
+                    },
+                    {
+                        targets: element,
+                        duration: flashDuration,
+                        alpha: 0,
+                        ease: easing,
+                        onComplete: () => {
+                            if (repeat === true) {
+                                this.flashElement(scene, element);
+                            }
+                        }
+                    }
+                ]
+            });
         }
-        this.playerAlive = false;
-        this.player.disableBody(true, true);
-        this.box.disableBody(true, true);
-
-        this.explosionAnim = this.add.sprite(this.playerPosX, this.playerPosY, 'explosion').setOrigin(0.5, 0.5);
-        this.explosionAnim.setScale(3);
-        this.anims.create({
-            key: 'explosion_anim',
-            frames: this.anims.generateFrameNumbers("explosion"),
-            frameRate: 10,
-            repeat: 0, // No repeats
-            hideOnComplete: true
-        });
-        this.explosionAnim.play('explosion_anim');
-
-        this.bgMusic.stop();
-
-        this.announcementText = this.add.text( this.cameras.main.centerX, this.cameras.main.centerY - 25, 
-            "You have failed\nGAME OVER", this.announcementStyle );
-        this.announcementText.setOrigin(0.5, 0);
-        this.gameStart = false;
-    }
-
-    // Adds image to a variable
-    addImage() {
-        // Player
-        this.player = this.physics.add.image(20, 400, 'man').setOrigin(0.5, 0.5);
-        this.player.setScale(0.10);
-        this.player.setCollideWorldBounds(true);
-        this.player.flipX = true;
-        this.player.body.setGravityY(300);
-
-        this.box = this.physics.add.image(this.player.x, this.player.y, 'yellow').setOrigin(0.5, 0.5);
-        this.box.setScale(0.15, 0.75);
-        this.box.body.setAllowGravity(false);
-
-
-        this.ground = this.physics.add.staticGroup().setOrigin(0);
-        this.ground.create(600, 610, 'ground').setScale(1, 0.02).refreshBody();
-
-        // Animal shelter or somethin
-        this.shelter = this.physics.add.image(700, 520, 'black').setScale(0.025, 0.05).setOrigin(0.5, 0.5);
-        this.shelter.body.setAllowGravity(false);
-
-    }
-
-
-
-        // Preloads the Image
-    preloadImage() {
-        this.load.image('background', 'assets/park.jpg');
-        this.load.image('black', 'assets/black.jpg');
-        this.load.image('yellow', 'assets/yellow.jpeg');
-        this.load.image('man', 'assets/man.png');
-        this.load.image('dog', 'assets/annoyingDog.png');
-        this.load.image('ground', 'assets/green.png');
-        this.load.image('trash', 'assets/trash.png');
-
-        this.load.spritesheet('explosion', 'assets/explosion3.png', {
-            frameWidth: 128,
-            frameHeight: 128
-        });
-    }
-
-    // Preloads the Audio
-    preloadAudio() {
-        this.load.audio('bgMusic', ['assets/326 Chiptune Cascade by Kubbi  Royalty Free Music.mp3']);
-        this.load.audio('explosion', ['assets/explosion.mp3']);
-        this.load.audio('beep', ['assets/beep.mp3']);
-        this.load.audio('squeak', ['assets/Squeak.mp3']);
-        this.load.audio('oof', ['assets/MinecraftOOF.mp3']);
-        this.load.audio('ouch', ['assets/ouch.mp3']);
-        this.load.audio('confirmation',['assets/UIConfirmation.mp3']);
-        this.load.audio('ding', ['assets/Ding.mp3']);
-
-    }
-
-    // Adds audio to a variable
-    addAudio() {
-        this.bgMusic = this.sound.add('bgMusic', {volume: 0.15});
-        this.explosion = this.sound.add('explosion', {volume: 0.75});
-        this.beep = this.sound.add('beep', {volume: 0.75});
-        this.squeak = this.sound.add('squeak', {volume: 0.75});
-        this.oof = this.sound.add('oof', {volume: 1.0});
-        this.ouch = this.sound.add('ouch', {volume: 0.80});
-        this.confirmation = this.sound.add('confirmation', {volume: 1.15});
-        this.ding = this.sound.add('ding', {volume: 0.75});
     }
 }
 
@@ -437,12 +278,6 @@ const game = new Phaser.Game({
     parent: 'game',
     width: 800,
     height: 600,
-    scene: MyScene,
-    physics: { 
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 600 },
-            debug: false
-        }
-    },
+    scene: [Title, Tutorial, MainScene],
+    physics: { default: 'arcade' },
     });
