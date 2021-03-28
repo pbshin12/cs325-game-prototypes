@@ -10,104 +10,29 @@
     "displayList": [
         {
             "type": "Image",
-            "id": "7d5827fd-34f6-473f-90e0-b9424a51d5fa",
-            "label": "dino",
+            "id": "14257db5-b1f7-4ebb-a713-2a3569eea38d",
+            "label": "galaxy",
             "components": [],
             "texture": {
-                "key": "dino"
+                "key": "galaxy"
             },
-            "x": 400,
-            "y": 300
-        },
-        {
-            "type": "Text",
-            "id": "b2b3dbd5-2106-41fa-8a04-9b511e3401a9",
-            "label": "text_1",
-            "components": [],
-            "x": 400,
-            "y": 450,
-            "originY": 0,
-            "text": "Welcome to Phaser Editor 2D!",
-            "fontSize": "30px",
-            "fontStyle": "bold"
+            "x": 985,
+            "y": 298,
+            "scaleX": 1.049821664278925,
+            "scaleY": 0.4778549338731816
         },
         {
             "type": "Image",
-            "id": "0aa04ca4-2f2c-4079-80fa-98d5a47187d5",
-            "label": "redCircle",
+            "id": "33683aeb-5b18-4dba-846e-511cea564df1",
+            "label": "wizard",
             "components": [],
             "texture": {
-                "key": "RedCircle"
+                "key": "Wizard"
             },
-            "x": 56,
-            "y": 222,
-            "scaleX": 0.08174692141333628,
-            "scaleY": 0.08174692141333628
-        },
-        {
-            "type": "Image",
-            "id": "7299cda8-70e1-4960-8dc4-eabc901fb3fe",
-            "label": "redCircle_1",
-            "components": [],
-            "texture": {
-                "key": "RedCircle"
-            },
-            "x": 55,
-            "y": 337,
-            "scaleX": 0.08174692141333628,
-            "scaleY": 0.08174692141333628
-        },
-        {
-            "type": "Image",
-            "id": "37e57789-c3b1-4bd4-8e42-328f2774e0f6",
-            "label": "redCircle_2",
-            "components": [],
-            "texture": {
-                "key": "RedCircle"
-            },
-            "x": 55,
-            "y": 281,
-            "scaleX": 0.08174692141333628,
-            "scaleY": 0.08174692141333628
-        },
-        {
-            "type": "Image",
-            "id": "93bbafb4-b841-490b-8589-3c472bf83b4b",
-            "label": "blueCircle",
-            "components": [],
-            "texture": {
-                "key": "BlueCircle"
-            },
-            "x": 673,
-            "y": 280,
-            "scaleX": 0.06233342674867835,
-            "scaleY": 0.06233342674867835
-        },
-        {
-            "type": "Image",
-            "id": "b248b54c-cfab-4609-9bd9-f372c6f930cd",
-            "label": "blueCircle_1",
-            "components": [],
-            "texture": {
-                "key": "BlueCircle"
-            },
-            "x": 676,
-            "y": 335,
-            "scaleX": 0.06233342674867835,
-            "scaleY": 0.06233342674867835
-        },
-        {
-            "type": "Image",
-            "id": "a7cd8e21-bc53-4992-adba-df4d739f17ea",
-            "label": "blueCircle_2",
-            "components": [],
-            "texture": {
-                "key": "BlueCircle"
-            },
-            "x": 672,
-            "y": 224,
-            "scaleX": 0.06233342674867835,
-            "scaleY": 0.06233342674867835
+            "x": 69,
+            "y": 336,
+            "scaleX": 0.06798699689888643,
+            "scaleY": 0.06798699689888643
         }
     ],
     "plainObjects": [],
