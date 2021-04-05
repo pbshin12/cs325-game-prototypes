@@ -1,0 +1,67 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/BlueCircle.png",
+                "type": "image",
+                "key": "BlueCircle"
+            },
+            {
+                "url": "assets/dino.png",
+                "type": "image",
+                "key": "dino"
+            },
+            {
+                "url": "assets/galaxy.jpg",
+                "type": "image",
+                "key": "galaxy"
+            },
+            {
+                "url": "assets/Level.js",
+                "type": "sceneFile",
+                "key": "Level"
+            },
+            {
+                "url": "assets/RedCircle.png",
+                "type": "image",
+                "key": "RedCircle"
+            },
+            {
+                "url": "assets/Square.png",
+                "type": "image",
+                "key": "Square"
+            },
+            {
+                "url": "assets/SquareSquare.png",
+                "type": "image",
+                "key": "SquareSquare"
+            },
+            {
+                "url": "assets/StartSpace.png",
+                "type": "image",
+                "key": "StartSpace"
+            },
+            {
+                "url": "assets/WhiteCircle.png",
+                "type": "image",
+                "key": "WhiteCircle"
+            },
+            {
+                "url": "assets/Wizard.png",
+                "type": "image",
+                "key": "Wizard"
+            },
+            {
+                "url": "assets/YellowSquare.jpg",
+                "type": "image",
+                "key": "YellowSquare"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2
+    }
+}

@@ -257,7 +257,6 @@ class MyScene extends Phaser.Scene {
         this.allBullets.push(this.bullet);
         this.physics.moveToObject(this.bullet, this.crossHair, 1000);
         this.control = 0;
-        
 
     }
 

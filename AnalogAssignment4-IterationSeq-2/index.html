@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Analog Assign 4 Iteration Seq 1</title>
+<style>
+body
+{
+    color: #777;
+    font-family: "Times New Roman", Verdana, sans-serif;
+}
+#readme
+{
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+<div id="game"></div>
+<div id="readme">
+<h2>Peter's Analog Assignment 4 Iteration Sequence 1: Yutnori for Wizards... Kinda</h2>
+
+<ul>
+<li><strong>Originality:</strong>
+What is original about your game?
+<p>This game was inspired by the traditional Korean board game called "Yutnori" which involves taking your pieces around the board and make it back to the start point (kind of like baseball). However, I took it upon myself to interpret the story behind it and made each station like a charging station. Which, afterwards, inspired me to make this game about a wizard who charges a magical station to defeat a villian. I also wanted to make an arcade-like game, so I tried to make it seem like a typical arcade game. </p>
+</li>
+
+<li><strong>Technical Merit:</strong>
+What is interesting about your game technology?
+<p>A lot of objects were used in the making of this project. Each station in the game is its own individual object where you can retrieve certain data such as their charge percentage, colliders, and other data. I had also experimented with scene transition and managed to produce a tutorial scene, that way I do not have to explain to my classmates the instructions.</p>
+</li>
+
+<li><strong>Prototype Postmortem:</strong>
+What did you learn from this prototype?
+What was the easiest or hardest part of making it?
+<p>The hardest for me was bringing all the objects together and provide me the correct data when a player collides on a station. I wanted each station to charge up when a player stands on it, but it was extremely difficult to find methods to directly take an overlap function inside of an object. So I had to hardcode each station's characteristics. Otherwise, I learned a lot about developing on different scenes and scene transitions.
+</p>
+</li>
+
+<li><strong>Prototype Assets:</strong>
+Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
+<p></p>
+<ul>
+<li>Title music: <a href="https://www.youtube.com/watch?v=TNYTFOiNO4s">Title Music</a></li>
+<li>Boss Music: <a href="https://www.youtube.com/watch?v=NzFKyZc_va4">Boss Battle</a></li>
+<li>Forest Background: <a href="https://opengameart.org/content/trees-bushes">Background</a></li>
+<li>Wizard: <a href="https://www.pixilart.com/art/pixel-wizard-144103346d5d3aa">Wizard</a></li>
+<li>Magic Sound Effect: <a href="https://www.youtube.com/watch?v=O5Y1QGG0q90">Magic Sound Effect</a></li>
+
+<p>The rest were from my previous, personal projects.</p>
+</ul>
+</li>
+
+<li><strong>Prototype Closest Other Game:</strong>
+Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<p>
+    I'm not entirely sure what this closely resembles. This is probably one of the few games that I had an original idea on. I guess one could say it's sort of like typical wargames where you capture the flag by defending a post.
+</p>
+<ul>
+<li>Follow Player: <a href="https://labs.phaser.io/edit.html?src=src/camera/follow%20user%20controlled%20sprite.js&v=3.54.0">Follow Player</a></li>
+<li>Timer Event: <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/">Time Event</a></li>
+<li>Flashing Text Example: <a href="https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/">Flashing Text</a></li>
+</ul>
+<p>The rest were either made from scratch, pulled from Phaser documentation, or were pulled from my previous works</p>
+</li>
+
+<li><strong>High Concept:</strong>
+A one-sentence summary of your game.
+<p>Charge up all stations to defeat the necromancer!</p>
+</li>
+
+<li><strong>Theme:</strong>
+State which of the Storymatic themes you used.
+<p>N/a</p>
+</li>
+
+<li><strong>Mandated Variety:</strong>
+State which input, randomness, genre, and play style you used in this prototype.
+<p>The input for this game is mostly direct and uses arrow keys to move. The game is mostly deterministic. The play style is in between explorer and collector. You explore to find each station, and you collect them by charging them up. The genre is probably overhead since this is from the top-down view.
+</p>
+</li>
+
+<li><strong>Prototype Goal:</strong>
+What game mechanic is this prototype evaluating?
+<p>I wanted to see if the station charging mechanic works and if the presence of the necromancer will make things stressful/put more pressure on the players.</p>
+</li>
+
+<li><strong>Player Experience Goals:</strong>
+What experience do you want players to have when playing your game?
+<p>I want players to feel pressured by the presence of something chasing them.</p>
+</li>
+
+<li><strong>Gameplay:</strong>
+A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<p>
+    Players can move their character around using the arrow keys. The objective of this prototype game is to activate all magic stations while also avoiding contact with the necromancer. The difficulty actually increases each time the player completes charging a station. So anyone who plays this game should plan their path wisely.
+</p>
+<p>
+</p>
+</li>
+
+<li><strong>Strategies:</strong>
+What player strategies do you expect will be effective at playing this game?
+<p>At the beginning, the necromancer is pretty slow. This is the best opportunity to charge the center station and it is best to charge the middle station first. Otherwise, it will be extremely difficult. Afterwards, slowly charge the rest of them, just barely before fully charged. Then when you're ready, run around in a circle. If done right, you should be able to activate all stations as you run by them.</p>
+</li>
+
+<li><strong>Story/Setting/Premise:</strong>
+A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
+How will the dramatic tension interact with the gameplay tension?
+<p>
+    The prophecy has come true. The pure evil that is the Necromancer has returned to destroy the world. The only way to destroy such evil is through the powers of the divine artifacts that are the magic stations. Do not let the Necromancer touch you, he has the hands of death and a single touch can instantly kill a man. Unfortunately for you, the Necromancer had heard the news that you were going to charge them and is coming after you!
+    <p>The scenario for this game coincides with the gameplay because it creates pressure on the player to try and avoid the Necromancer. I did design him to be menacing and annoying during gameplay.</p>
+</p>
+</li>
+
+<li><strong>Target Audience:</strong>
+A single sentence that describes the demographic you're trying to reach.
+<p>This game is intended for audiences aged 10 and up</p>
+</li>
+
+<li><strong>Play Time:</strong>
+How long does your game take to play?
+<p>This game should take no more than 5 minutes to play</p>
+</li>
+
+</ul>
+</div>
+
+<!-- main.js must come at the end since it expects the HTML to have been created. -->
+<script src="js/main.js" type="module"></script>
+</body>
+</html>
