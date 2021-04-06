@@ -556,7 +556,7 @@ class Lose extends Phaser.Scene
         this.style3 = {font: "20px Comic Sans MS", fill: '#ffffff', align: "center"};
         this.cameras.main.setBackgroundColor('#000000');
         
-        this.bossMusic = this.sound.add('bossMusic', { volume: 0.35 });
+        this.bossMusic = this.sound.add('bossMusic', { volume: 0.15 });
 
         TweenHelper.flashElement(this, this.screenText);
         this.text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, "YOU LOSE", this.style1).setOrigin(0.5,0.5);
