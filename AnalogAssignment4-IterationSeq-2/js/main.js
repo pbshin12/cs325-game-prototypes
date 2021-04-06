@@ -13,7 +13,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 let currentScene;
-let timeElapsed;
+let timeElapsed = 0;
 
 class Title extends Phaser.Scene
 {
@@ -100,7 +100,7 @@ class Tutorial extends Phaser.Scene
         this.wizard = this.add.image(this.cameras.main.centerX + 250, 450, 'wizard').setOrigin(0.5).setScale(0.15);
         this.necromancer = this.add.image(100, 450, 'necromancer').setOrigin(0.5).setScale(0.35);
 
-        this.tutorial = "\n\n\n\nYou are a wizard fighting a formidable villian: the Necromancer!\nTo defeat him, you must harness the power of the magic stations located around the map.\nBut you must charge them with your own magic.\nHowever, the Necromancer has heard of the sacred magic stations\nand is coming to capture you before you could charge them!\n\n\n\n\nArrow keys to move\n\nStand on top of any station to charge it\n\nDo not let him touch you!";
+        this.tutorial = "\n\n\n\n\n\nYou are a wizard fighting a formidable villian: the Necromancer!\nTo defeat him, you must harness the power of the magic stations located around the map.\nBut you must charge them with your own magic.\nHowever, the Necromancer has heard of the sacred magic stations\nand is coming to capture you before you could charge them!\n\n\n\n\nArrow keys to move\n\nStand on top of any station to charge it\n\nDo not let him touch you!\n\nBy the way, I heard the necromancer had\n trained the fiercest animal on earth.\nBe careful!";
         
 
         this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Play', this.style2).setOrigin(0.5);
@@ -154,7 +154,6 @@ class MainScene extends Phaser.Scene
     enemyDirection = 1;
     playerHealth = 3; // Can take 3 hits, or one hit?
     total_Charge = 0;
-    finalPhase = false;
 
     constructor()
     {
@@ -174,6 +173,7 @@ class MainScene extends Phaser.Scene
 
     create()
     {
+        this.finalPhase = false;
         this.game.sound.stopAll();
         this.cameras.main.fadeIn(200, 0, 0, 0);
         this.createControls();
@@ -195,12 +195,23 @@ class MainScene extends Phaser.Scene
         this.add.image(0, 474, 'bg').setOrigin(0).setFlipY(true);
         this.add.image(474, 474, 'bg').setOrigin(0).setFlipX(true).setFlipY(true);
 
+        this.projectile = this.physics.add.group();
         this.EnemyProjectile = this.time.addEvent({
-            delay: 2000,
+            delay: 1000,
             callback: this.fire,
             callbackScope: this,
             loop: true
         });
+
+        this.timer = this.time.addEvent(
+            {
+                delay: 1000,
+                callback: this.incrementTimer,
+                callbackScope: this,
+                loop: true
+            }
+        );
+
         
         // Creating station objects. This is where advanced stuff happens
         for (var i = 0; i < 5; i++)
@@ -262,16 +273,67 @@ class MainScene extends Phaser.Scene
         this.cameras.main.setZoom(1.25);
 
         this.time.delayedCall(2000, () => this.cameras.main.startFollow(this.player, true, 0.50, 0.50));
-        
 
+
+        this.physics.add.overlap(this.player, this.projectile, this.killPlayer, null, this);
         
+        this.timerText = this.add.text( (this.cameras.main.width / 2) , 100).setScrollFactor(0).setFontSize(30).setColor('#ffffff').setOrigin(0.5);
+        
+    }
+
+    incrementTimer()
+    {
+        timeElapsed += 1;
+        //console.log(`Time elapsed: ${timeElapsed} seconds`);
+        this.timerText.setText(`Time Elapsed: ${timeElapsed} seconds`);
     }
 
     fire()
     {
+        let spawnLocation = [1, 2, 3, 4];
+        let projectile = null;
         if (this.finalPhase === true)
         {
+            let randInt = Phaser.Math.Between(1, 4);
+            switch(spawnLocation[randInt])
+            {
+                case 1:
+                    projectile = this.projectile.create(0, 0, 'dog').setOrigin(0.5).setScale(0.3);
+                    this.physics.moveToObject(projectile, this.player, 175);
+                    projectile.setSize(100, 100, true);
+                    break;
+                case 2:
+                    projectile = this.projectile.create(950, 0, 'dog').setOrigin(0.5).setScale(0.3);
+                    this.physics.moveToObject(projectile, this.player, 175);
+                    projectile.setSize(100, 100, true);
+                    break;
+                case 3:
+                    projectile = this.projectile.create(0, 950, 'dog').setOrigin(0.5).setScale(0.3);
+                    this.physics.moveToObject(projectile, this.player, 175);
+                    projectile.setSize(100, 100, true);
+                    break;
+                case 4:
+                    projectile = this.projectile.create(950, 950, 'dog').setOrigin(0.5).setScale(0.3);
+                    this.physics.moveToObject(projectile, this.player, 175);
+                    projectile.setSize(100, 100, true);
+                    break;
+            }
+            this.projectile.children.iterate(function(projectile)
+            {
+                if (projectile.x < -100 || projectile.x > 1000)
+                {
+                    projectile.disableBody(true, true);
+                    console.log("Dog destroyed");
+                }
+
+                if (projectile.y < -100 || projectile.y > 1000)
+                {
+                    projectile.disableBody(true, true);
+                    console.log("Dog destroyed");
+                }
+            });
             console.log("Final phase activated, firing projectiles");
+
         }
         else
         {
@@ -435,18 +497,18 @@ class MainScene extends Phaser.Scene
         }
         this.total_Charge = (total_Sum / 500) * 100;
 
-        if (this.total_Charge >= 20.0 && this.total_Charge < 39)
+        if (this.total_Charge >= 15.0 && this.total_Charge < 39)
         {
             this.necromancerSpeed = 50;
         }
         if (this.total_Charge >= 40.0 && this.total_Charge < 59)
         {
             this.necromancerSpeed = 100;
+            this.finalPhase = true;
         }
         if (this.total_Charge >= 60.0 && this.total_Charge < 69)
         {
             this.necromancerSpeed = 175;
-            this.finalPhase = true;
         }
         if (this.total_Charge >= 70.0 && this.total_Charge < 99)
         {
@@ -480,6 +542,7 @@ class Lose extends Phaser.Scene
     {
         this.load.image('wizard', 'assets/Wizard.png');
         this.load.image('necromancer', 'assets/skeletonSoldier.png');
+        this.load.image('dog', 'assets/annoyingDog.png')
 
         this.load.audio('bossMusic', ["assets/8-Bit RPG Music - Boss Battle Original Composition.mp3"]);
         this.space = this.input.keyboard.addKey('SPACE');
@@ -504,6 +567,10 @@ class Lose extends Phaser.Scene
 
         this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Return to Title Screen', this.style2).setOrigin(0.5);
         TweenHelper.flashElement(this, this.screenText);
+
+        this.minutes = Math.trunc(timeElapsed / 60);
+        this.seconds = timeElapsed % 60;
+        this.timerText = this.add.text(this.cameras.main.centerX, 400, `Time elapsed: ${this.minutes} minute(s) ${this.seconds} second(s)`, this.style3).setOrigin(0.5);
         
 
         this.tutorialText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, this.tutorial, this.style3).setOrigin(0.5);
@@ -522,7 +589,9 @@ class Lose extends Phaser.Scene
             if (this.musicPlayed === false)
             {
                 this.game.sound.stopAll();
+                timeElapsed = 0;
                 this.scene.start('title');
+                
             }
             
             
@@ -578,6 +647,10 @@ class Victory extends Phaser.Scene
         TweenHelper.flashElement(this, this.screenText);
         
 
+        this.minutes = Math.trunc(timeElapsed / 60);
+        this.seconds = timeElapsed % 60;
+        this.timerText = this.add.text(this.cameras.main.centerX, 400, `Time elapsed: ${this.minutes} minute(s) ${this.seconds} second(s)`, this.style3).setOrigin(0.5);
+
         this.tutorialText = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY - 100, this.tutorial, this.style3).setOrigin(0.5);
         this.musicPlayed = false;
     }
@@ -594,7 +667,9 @@ class Victory extends Phaser.Scene
             if (this.musicPlayed === false)
             {
                 this.game.sound.stopAll();
+                timeElapsed = 0;
                 this.scene.start('title');
+                
             }
             
             
@@ -664,5 +739,5 @@ const game = new Phaser.Game({
     height: 600,
     scene: [Title, Tutorial, MainScene, Lose, Victory],
     physics: { default: 'arcade',
-                arcade: {debug: false} },
+                arcade: {debug: true} },
     });
