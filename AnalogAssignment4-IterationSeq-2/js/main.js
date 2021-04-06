@@ -299,22 +299,22 @@ class MainScene extends Phaser.Scene
             {
                 case 1:
                     projectile = this.projectile.create(0, 0, 'dog').setOrigin(0.5).setScale(0.3);
-                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 350) );
+                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 500) );
                     projectile.setSize(100, 100, true);
                     break;
                 case 2:
                     projectile = this.projectile.create(950, 0, 'dog').setOrigin(0.5).setScale(0.3);
-                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 350));
+                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 500));
                     projectile.setSize(100, 100, true);
                     break;
                 case 3:
                     projectile = this.projectile.create(0, 950, 'dog').setOrigin(0.5).setScale(0.3);
-                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 350));
+                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 500));
                     projectile.setSize(100, 100, true);
                     break;
                 case 4:
                     projectile = this.projectile.create(950, 950, 'dog').setOrigin(0.5).setScale(0.3);
-                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 350));
+                    this.physics.moveToObject(projectile, this.player, Phaser.Math.Between(100, 500));
                     projectile.setSize(100, 100, true);
                     break;
             }
