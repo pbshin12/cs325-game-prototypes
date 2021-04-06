@@ -91,7 +91,7 @@ class Tutorial extends Phaser.Scene
         this.style3 = {font: "20px Comic Sans MS", fill: '#ffffff', align: "center"};
         this.cameras.main.setBackgroundColor('#000000');
         
-        this.bossMusic = this.sound.add('bossMusic', { volume: 0.35 });
+        this.bossMusic = this.sound.add('bossMusic', { volume: 0.15 });
 
         this.screenText = this.add.text(this.cameras.main.centerX, 500, 'Press Space to Play', this.style2).setOrigin(0.5);
         TweenHelper.flashElement(this, this.screenText);
@@ -177,7 +177,7 @@ class MainScene extends Phaser.Scene
         this.game.sound.stopAll();
         this.cameras.main.fadeIn(200, 0, 0, 0);
         this.createControls();
-        this.bossMusic = this.sound.add('bossMusic2', {volume: 0.35});
+        this.bossMusic = this.sound.add('bossMusic2', {volume: 0.15});
         this.bossMusic.play();
         this.bossMusic.repeat = true;
         this.magicActivation = this.sound.add('magicSoundFX');
