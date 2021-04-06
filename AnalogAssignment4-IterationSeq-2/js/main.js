@@ -197,7 +197,7 @@ class MainScene extends Phaser.Scene
 
         this.projectile = this.physics.add.group();
         this.EnemyProjectile = this.time.addEvent({
-            delay: 350,
+            delay: 250,
             callback: this.fire,
             callbackScope: this,
             loop: true
