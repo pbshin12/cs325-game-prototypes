@@ -739,5 +739,5 @@ const game = new Phaser.Game({
     height: 600,
     scene: [Title, Tutorial, MainScene, Lose, Victory],
     physics: { default: 'arcade',
-                arcade: {debug: true} },
+                arcade: {debug: false} },
     });
