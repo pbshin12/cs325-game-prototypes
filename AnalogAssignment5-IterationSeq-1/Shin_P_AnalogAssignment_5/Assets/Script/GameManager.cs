@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{
-    public SoundFX soundEffects;
-    
+{   
     public static int phase = 1;
     public static int playerHealth = 3;
     public static int bossHealth = 2500;
@@ -53,5 +51,17 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(explosion, 0.8f);
             this.explosionPlayed = true;
         }
+
+       if (!bossAlive && !this.explosionPlayed)
+        {
+            Debug.Log("BOSS DIED");
+            audioSource.PlayOneShot(explosion, 0.8f);
+            this.explosionPlayed = true;
+        }
+    }
+
+    void spawnPipe()
+    {
+
     }
 }

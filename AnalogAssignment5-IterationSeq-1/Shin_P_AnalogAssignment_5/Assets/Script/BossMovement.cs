@@ -7,6 +7,9 @@ public class BossMovement : MonoBehaviour
     public float timeBetweenAttacks = 1.0f;
     private float timer = 0f;
 
+    
+    public Transform explosion;
+
     public float speed = 1.0f;
     public float height = 0.5f;
     public float startPosition = 6.0f;
@@ -30,11 +33,27 @@ public class BossMovement : MonoBehaviour
         //set the object's Y to the new calculated Y
         boss.transform.position = new Vector2(startPosition, newY) * height;
         
+        if (GameManager.phase == 2)
+        {
+            timeBetweenAttacks = 0.75f;
+        }
+        if (GameManager.phase == 3)
+        {
+            timeBetweenAttacks = 0.45f;
+        }
+
         //Debug.Log(transform.position.y);
         if (timer >= timeBetweenAttacks)
         {
             fire();
             timer = 0;
+        }
+
+        if (GameManager.bossHealth <= 0)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            GameManager.bossAlive = false;
+            Destroy(gameObject);
         }
     }
 
