@@ -1,0 +1,14 @@
+Ship - https://opengameart.org/content/spaceship-fighter-ipod1
+Space invaders - https://studio.code.org/projects/applab/pnfUm3jM3I1s8zt7PQ0lv3_0O2NT_84BsD6aniJ2d7A
+Blue Flame - https://www.stickpng.com/img/nature/fire/blue-fire-flame
+Dynamic Space Background - https://assetstore.unity.com/packages/2d/textures-materials/dynamic-space-background-lite-104606
+white - http://www.solidbackgrounds.com/2560x1440-ghost-white-solid-color-background.html
+Explosion - https://scratch.mit.edu/discuss/topic/205929/?page=1#post-2072127
+Laser Bullet - https://codepen.io/UmerJ/pen/bqxZBM
+Laser Gun sound effect - https://www.youtube.com/watch?v=FuvmTL1nPDs
+Explosion sound effect - https://www.youtube.com/watch?v=cv8-ahdy7z4
+Music - https://www.youtube.com/watch?v=9aKIkh4gfqs
+Insert Title Here - http://www.quiteenjoy.com/about-insert-title-here/
+Start button - http://pixelartmaker.com/art/a44e3814607fa81
+
+Deleting objects after animation - https://answers.unity.com/questions/670860/delete-object-after-animation-2d.html
