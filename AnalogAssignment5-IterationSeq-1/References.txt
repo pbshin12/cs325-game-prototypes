@@ -1,0 +1,7 @@
+title music - https://www.youtube.com/watch?v=TNYTFOiNO4s
+boss music - https://www.youtube.com/watch?v=NzFKyZc_va4
+forest background - https://opengameart.org/content/trees-bushes
+wizard - https://www.pixilart.com/art/pixel-wizard-144103346d5d3aa
+follow player - https://labs.phaser.io/edit.html?src=src/camera/follow%20user%20controlled%20sprite.js&v=3.54.0
+flashing text example - https://www.stephengarside.co.uk/blog/phaser-3-flashing-text-easy-example/
+magic sound effect - https://www.youtube.com/watch?v=O5Y1QGG0q90
