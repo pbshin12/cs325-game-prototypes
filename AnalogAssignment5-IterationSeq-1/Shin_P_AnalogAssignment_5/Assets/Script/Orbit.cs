@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class Orbit : MonoBehaviour
 {
-    public GameObject boss;
+    public Transform boss;
+    public float nextTimeToSearch = 0f;
     public float speed;
+
+    private void Awake()
+    {
+        FindBoss();
+    }
+
+    /* Searches for the boss so that we can obtain the position */
+    void FindBoss()
+    {
+        if (nextTimeToSearch <= Time.time)
+        {
+            GameObject searchResult = GameObject.FindGameObjectWithTag("Boss");
+            if (searchResult != null)
+            {
+                boss = searchResult.transform;
+            }
+
+        }
+    }
+
+    
+
     // Start is called before the first frame update
     void Start()
     {

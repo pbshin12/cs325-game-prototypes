@@ -9,6 +9,7 @@ TagManager:
   - FireBall
   - Pipe
   - Minion
+  - Boss
   layers:
   - Default
   - TransparentFX

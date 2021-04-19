@@ -15,3 +15,10 @@ canceling gravity: https://phaser.discourse.group/t/canceling-gravity-on-a-speci
 boss music - https://www.youtube.com/watch?v=KagcLZSvLWo
 
 gitignore file for Unity version control - https://github.com/github/gitignore/blob/master/Unity.gitignore
+
+
+													Press SPACE or W to "Hop"
+														Press J to "Fire"
+												When you're ready, press K to start
+													  
+													  Do not touch the ground!

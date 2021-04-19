@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,13 +22,37 @@ public class GameManager : MonoBehaviour
     public Transform spawnPoint;
 
     public GameObject pipePrefab;
-    private int incrementCounter = 0;
+    //private int incrementCounter = 0;
     private float speed = -5f;
 
     public GameObject solidGround;
     public Transform solidGroundSpawn;
 
-    
+    public GameObject minion;
+    public GameObject boss;
+    //public int MAXminionSpawnCounter = 5;
+    public float timeBetweenMinionSpawn = 0.5f;
+    private float minionSpawnTimer = 0f;
+    //private int minionSpawnCounter = 0;
+
+    public GUIStyle guiStyle = new GUIStyle();
+    public GUIStyle guiStyle2 = new GUIStyle();
+    public GameObject tutorial;
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(40, 40, 120, 40), "Lives: " + playerHealth, guiStyle);
+
+        if (!playerAlive)
+        {
+            GUI.Label(new Rect(600, 300, 120, 40), "YOU LOSE!\nPress R to reset", guiStyle2);
+        }
+
+        if (!bossAlive)
+        {
+            GUI.Label(new Rect(600, 300, 120, 40), "YOU WIN!\nPress R to reset", guiStyle2);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +64,38 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            reset();
+        }
+
+        /* If boss is dead, destroy all minions */
+        if (!bossAlive)
+        {
+            GameObject[] minions = GameObject.FindGameObjectsWithTag("Minion");
+            foreach (GameObject minion in minions)
+            {
+                GameObject.Destroy(minion);
+            }
+        }
+
         timer += Time.deltaTime;
-        
+        minionSpawnTimer += Time.deltaTime;
+
+
         if (GameManager.playerAlive && GameManager.bossAlive)
         {
             if (timer >= timeBetweenSpawn && phase >= 2)
             {
                 spawnPipe();
                 timer = 0;
+            }
+
+            if (minionSpawnTimer >= timeBetweenMinionSpawn && phase >= 3)
+            {
+                Instantiate(minion, new Vector3(boss.transform.position.x - 1.5f, boss.transform.position.y, 0), Quaternion.identity);
+                minionSpawnTimer = 0;
             }
         }
         
@@ -75,7 +124,6 @@ public class GameManager : MonoBehaviour
             {
                 speed -= 0.05f;
                 PipeSpeed.pipeSpeed = new Vector2(speed, 0);
-                incrementCounter++;
             }
             
             phase = 3;
@@ -87,6 +135,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("GAME OVER");
             audioSource.PlayOneShot(explosion, 0.8f);
             this.explosionPlayed = true;
+            
         }
 
        if (!bossAlive && !this.explosionPlayed)
@@ -95,9 +144,25 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(explosion, 0.8f);
             this.explosionPlayed = true;
             Instantiate(solidGround, solidGroundSpawn.position, Quaternion.identity);
+            
+
         }
 
 
+    }
+
+    /* Resets all instances and the scene*/
+    void reset()
+    {
+        playerAlive = true;
+        bossAlive = true;
+        phase = 1;
+        playerHealth = 3;
+        bossHealth = 2500;
+        this.explosionPlayed = false;
+        timeBetweenSpawn = 4.0f;
+        SceneManager.LoadScene(0);
+        
     }
 
     /* Will either spawn pipes on top or at the bottom, randomly */

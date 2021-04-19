@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/* This snippet of code oringated from one of my personal projects */
 public class Enemy : MonoBehaviour
 {
     [System.Serializable]
@@ -35,9 +36,9 @@ public class Enemy : MonoBehaviour
     public AudioClip minionHurtSound;
     public AudioClip minionExplosionSound;
 
+
     public EnemyStats stats = new EnemyStats();
-
-
+    
     private void Start()
     {
 
