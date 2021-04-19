@@ -5,6 +5,8 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     AudioSource audioSource;
+    public AudioClip playerOOFSound;
+    public AudioClip playerHurtSound;
     public float projectileSpeed = 10f;
     public Rigidbody2D rb;
 
@@ -28,11 +30,13 @@ public class Laser : MonoBehaviour
             return;
         }
 
-        if (collision.name == "Wizard")
+        if (collision.gameObject.tag == "Player")
         {
             //TODO --> deal damage to player
             GameManager.playerHealth -= 1;
             Debug.Log("Player health is now at: " + GameManager.bossHealth);
+            AudioSource.PlayClipAtPoint(playerOOFSound, new Vector3(0, 0, -10));
+            AudioSource.PlayClipAtPoint(playerHurtSound, new Vector3(0, 0, -10));
         }
 
         Destroy(gameObject);

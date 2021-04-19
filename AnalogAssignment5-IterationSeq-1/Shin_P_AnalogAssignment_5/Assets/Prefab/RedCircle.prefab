@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ea003c1e3b50b45962ecd2cc994454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerOOFSound: {fileID: 8300000, guid: f69ec60ab47e6b44b97b364326f2d16a, type: 3}
+  playerHurtSound: {fileID: 8300000, guid: cf84da98abdaf6440a3872f726094c9b, type: 3}
   projectileSpeed: 10
   rb: {fileID: 2173736278556292324}
 --- !u!50 &2173736278556292324

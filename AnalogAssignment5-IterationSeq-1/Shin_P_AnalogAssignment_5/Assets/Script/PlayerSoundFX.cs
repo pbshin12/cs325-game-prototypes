@@ -8,6 +8,8 @@ public class PlayerSoundFX : MonoBehaviour
     public AudioClip PlayerShootSound;
     public AudioClip PlayerDeathSound;
     public AudioClip PlayerHopSound;
+    public AudioClip PlayerOOFSound;
+    public AudioClip PlayerOuchSound;
 
     // Start is called before the first frame update
     void Start()
@@ -45,5 +47,11 @@ public class PlayerSoundFX : MonoBehaviour
     public void hopSoundFX()
     {
         this.playerSoundFX.PlayOneShot(PlayerHopSound, 1.5f);
+    }
+
+    public void oofSoundFX()
+    {
+        this.playerSoundFX.PlayOneShot(PlayerOOFSound, 1.5f);
+        this.playerSoundFX.PlayOneShot(PlayerOuchSound, 0.7f);
     }
 }
