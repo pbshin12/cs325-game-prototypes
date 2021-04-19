@@ -10,7 +10,7 @@ public class Parallax : MonoBehaviour
     private float moveSpeed = 1f;
 
     [SerializeField]
-    private float offset;
+    private float offset = 0;
 
     private Vector2 startPosition;
     private float newXposition;

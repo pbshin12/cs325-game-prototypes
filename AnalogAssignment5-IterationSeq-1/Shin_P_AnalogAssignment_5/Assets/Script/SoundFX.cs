@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class SoundFX : MonoBehaviour
 {
-    public AudioClip PlayerShootSound;
-    public AudioClip PlayerDeathSound;
-    //public AudioClip BossDeathSound;
+    
+    //TODO: public AudioClip BossDeathSound;
     public AudioSource effectPlayer;
-    public bool playerisDead;
-    public GameObject player;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        effectPlayer = GetComponent<AudioSource>();
+        this.effectPlayer.volume = 0.3f; /* Set volume when game starts */
     }
 
     // Update is called once per frame
@@ -21,4 +20,11 @@ public class SoundFX : MonoBehaviour
     {
         
     }
+
+    /* Setter method that sets the effectPlayer to assigned clip */
+    public void setAudio(AudioClip clip)
+    {
+        this.effectPlayer.clip = clip;
+    }
+
 }
