@@ -13,6 +13,7 @@ public class fireBall : MonoBehaviour
         rb.velocity = transform.right * projectileSpeed;
     }
 
+    /* Do something if fireBall collides with an enemy */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collided with: " + collision.name);

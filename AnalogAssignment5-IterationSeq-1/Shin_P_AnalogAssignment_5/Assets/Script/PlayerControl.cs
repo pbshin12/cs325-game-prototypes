@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Players can hop using the SPACE and W buttons and shoot with J */
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
             var vel = GetComponent<Rigidbody2D>().velocity;
