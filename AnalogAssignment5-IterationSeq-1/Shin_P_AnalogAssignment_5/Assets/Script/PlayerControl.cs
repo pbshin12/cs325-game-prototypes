@@ -6,7 +6,8 @@ public class PlayerControl : MonoBehaviour
 {
     private bool explosionPlayed = false;
 
-    public int playerHealth = 3;
+    public Transform explosion;
+
     public PlayerSoundFX playerSoundFX;
     public PlayerAttack playerAttack;
     public float yVal = 3.0f;
@@ -40,8 +41,11 @@ public class PlayerControl : MonoBehaviour
             /* Explosion will only play once */
             if (!explosionPlayed)
             {
+                Instantiate(explosion, transform.position, Quaternion.identity);
                 playerSoundFX.playerExplosion();
                 this.explosionPlayed = true;
+                GameManager.playerAlive = false;
+                Destroy(gameObject);
             }
 
         }

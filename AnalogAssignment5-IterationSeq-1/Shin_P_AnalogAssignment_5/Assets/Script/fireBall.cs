@@ -23,14 +23,20 @@ public class fireBall : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collided with: " + collision.name);
-
-        //TODO --> deal damage to enemy/boss
+        
+        if (collision.gameObject.tag == "Laser")
+        {
+            return;
+        }
 
         Instantiate(explosion, transform.position, Quaternion.identity);
 
         if (collision.name == "skeletonSoldier")
         {
-            AudioSource.PlayClipAtPoint(bossHurtSound, transform.position, 5.0f);
+            //TODO --> deal damage to enemy/boss
+            AudioSource.PlayClipAtPoint(bossHurtSound, new Vector3(0, 0, -10));
+            GameManager.bossHealth -= damage;
+            Debug.Log("Boss health is now at: " + GameManager.bossHealth);
         }
 
         Destroy(gameObject);

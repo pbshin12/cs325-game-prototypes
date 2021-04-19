@@ -12,6 +12,6 @@ movement control: https://phaser.io/tutorials/making-your-first-phaser-3-game/pa
 
 timer event: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/timer/
 canceling gravity: https://phaser.discourse.group/t/canceling-gravity-on-a-specific-object/2854
-music - https://www.youtube.com/watch?v=9hzxHeIq1LQ&t=1s
+boss music - https://www.youtube.com/watch?v=KagcLZSvLWo
 
 gitignore file for Unity version control - https://github.com/github/gitignore/blob/master/Unity.gitignore

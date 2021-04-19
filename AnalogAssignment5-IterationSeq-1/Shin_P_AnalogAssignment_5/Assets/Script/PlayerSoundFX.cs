@@ -13,7 +13,7 @@ public class PlayerSoundFX : MonoBehaviour
     void Start()
     {
         this.playerSoundFX = GetComponent<AudioSource>();
-        this.playerSoundFX.volume = 0.3f;
+        this.playerSoundFX.volume = 0.75f;
     }
 
     // Update is called once per frame
@@ -38,12 +38,12 @@ public class PlayerSoundFX : MonoBehaviour
     {
         //this.setAudio(this.PlayerShootSound);
         //this.playerSoundFX.Play();
-        this.playerSoundFX.PlayOneShot(PlayerShootSound, 0.3f);
+        this.playerSoundFX.PlayOneShot(PlayerShootSound, 0.75f);
 
     }
 
     public void hopSoundFX()
     {
-        this.playerSoundFX.PlayOneShot(PlayerHopSound, 0.80f);
+        this.playerSoundFX.PlayOneShot(PlayerHopSound, 1.5f);
     }
 }

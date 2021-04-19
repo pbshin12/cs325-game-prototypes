@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     public void shoot()
     {
         Debug.Log("Player shooting");
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
 
     }
 }
