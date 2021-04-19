@@ -1,207 +1,138 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Shin_P_AnalogAssignment_5</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <style>
-      body
-      {
-          color: #777;
-          font-family: "Times New Roman", Verdana, sans-serif;
-      }
-      #readme
-      {
-          margin-top: 900px;
-      }
-      </style>
-  </head>
-  <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-mobile-warning">
-        WebGL builds are not supported on mobile devices.
-      </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Shin_P_AnalogAssignment_5</div>
-      </div>
-    </div>
-    <script>
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL_Build.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/WebGL_Build.data.gz",
-        frameworkUrl: buildUrl + "/WebGL_Build.framework.js.gz",
-        codeUrl: buildUrl + "/WebGL_Build.wasm.gz",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "Shin_P_AnalogAssignment_5",
-        productVersion: "0.1",
-      };
+<html>
+<head>
+    
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Analog Assign 5 Iteration Seq 1</title>
+<iframe src="https://itch.io/embed/1003298" height="167" width="552" frameborder="0"><a href="https://peter-shin.itch.io/testing">Testing by Peter Shin</a></iframe>
+<style>
+body
+{
+    color: #777;
+    font-family: "Times New Roman", Verdana, sans-serif;
+}
+#readme
+{
+    margin-top: 10px;
+}
+</style>
 
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var mobileWarning = document.querySelector("#unity-mobile-warning");
+</head>
 
-      // By default Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+<body>
+<div id="game"></div>
+<div id="readme">
+<h2>Peter's Analog Assignment 5 Iteration Sequence 1: The Final Battle (A "Yutnori for Wizards... Kinda" Sequel)</h2>
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        container.className = "unity-mobile";
-        // Avoid draining fillrate performance on mobile devices,
-        // and default/override low DPI mode on mobile browsers.
-        config.devicePixelRatio = 1;
-        mobileWarning.style.display = "block";
-        setTimeout(() => {
-          mobileWarning.style.display = "none";
-        }, 5000);
-      } else {
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
-      }
-      loadingBar.style.display = "block";
+<ul>
+<li><strong>Originality:</strong>
+What is original about your game?
+<p>This game was originally intended to be a BulletHell, but then it evolved into a modified version of Flappy Bird and I stuck with it. </p>
+</li>
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-      document.body.appendChild(script);
-    </script>
-    <div id="game"></div>
-    <div id="readme">
-    <h2>Peter's Analog Assignment 5 Iteration Sequence 1: The Final Battle (A "Yutnori for Wizards... Kinda" Sequel)</h2>
-    
-    <ul>
-    <li><strong>Originality:</strong>
-    What is original about your game?
-    <p>This game was originally intended to be a BulletHell, but then it evolved into a modified version of Flappy Bird and I stuck with it. </p>
-    </li>
-    
-    <li><strong>Technical Merit:</strong>
-    What is interesting about your game technology? / Why I do not like Phaser
-    <p>This game is made using the Unity game engine. There are several reasons why I chose not to use Phaser 3. Before I begin, I want to mention that I am spoiled by the convenience of Unity so I am definitely biased against Phaser 3. First, it is extremely difficult to see where I am placing my sprites and game objects. Having to figure out where to place objects through trial and error wastes a lot of my time whereas in Unity I can simply click and drag and know exactly where it is placed. It was also convenient to click and drag audio files onto the Unity interface and have it ready. Second, I was able to easily create groups without having to manually guess and check where to place objects within said group. This is especially apparent when it comes to hitboxes. Thirdly, I felt creatively restricted when using Phaser and I often do not know what I'm looking for because I can't find what I needed. What's frustrating is that many of the examples are outdated and I often spend hours searching for something end up empty-handed. In Unity, there are thousands of Youtube videos on nearly everything and I was able to figure out what I needed fairly quickly. Also, Unity's documentation is much easier to read and follow than Phaser's, they provide examples as to how it should look like. Fourth, I had a much easier time managing colliders and triggers in Unity since Unity has built-in functions that handle that. Phaser does have collision detection, but it is often very confusing and I often lose track of the many objects that interact with each other. Whereas in Unity, I can generalize a specific group of objects by either referring to their tag, or even their name, which is very convenient. Lastly, I was a bit frustrated with the Update() function in Phaser 3, especially when it comes to basic controls. There was a consensus amongst several of my classmates where they had encountered a strange bug where their character will be stuck moving in one direction. There were also complaints of strange interactions with different objects whenever they try to implement physics. The fix in Unity would be to use FixedUpdate(), but I had an extremely difficult time finding the equivalent in Phaser. The same can be said regarding DeltaTime, which enables me to record the relative time for a given event. </p>
-    </li>
-    
-    <li><strong>Prototype Postmortem:</strong>
-    What did you learn from this prototype?
-    What was the easiest or hardest part of making it?
-    <p>The hardest for me was figuring out how to give the boss different phases in the fight. The easiest part was the "hopping" controls for the player. I definitely learned a lot, I discovered that there is a built-in function in Unity that enables objects to orbit around another object.
-    </p>
-    </li>
-    
-    <li><strong>Prototype Assets:</strong>
-    Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
-    <p></p>
-    <ul>
-    <li>Boss Music: <a href="https://www.youtube.com/watch?v=NzFKyZc_va4">Boss Battle</a></li>
-    <li>Parallax Background: <a href="https://www.youtube.com/watch?v=zit45k6CUMk">Background</a></li>
-    <li>Wizard: <a href="https://www.pixilart.com/art/pixel-wizard-144103346d5d3aa">Wizard</a></li>
-    <li>Object Orbit <a href="https://www.youtube.com/watch?v=3PHc6vEckvc">Orbit</a></li>
-    <li>Annoying Dog (Undertale): <a href="https://www.reddit.com/r/Undertale/comments/fkl1fh/an_annoying_dog_appeared/">Dog</a></li>
-    
-    <p>The rest were from my previous, personal projects.</p>
-    </ul>
-    </li>
-    
-    <li><strong>Prototype Closest Other Game:</strong>
-    Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
-    <p>
-        This game resembles Flappy Bird with the pipes and controls, but with added twists.
-    </p>
-    <ul>
-    <li>Parallax Background: <a href="https://www.youtube.com/watch?v=zit45k6CUMk">Parallax</a></li>
-    <li>Orbit: <a href="https://www.youtube.com/watch?v=3PHc6vEckvc">Orbit</a></li>
-    </ul>
-    <p>The rest were either made from scratch, pulled from Unity documentation, or were pulled from my previous works</p>
-    </li>
-    
-    <li><strong>High Concept:</strong>
-    A one-sentence summary of your game.
-    <p>Hop, dodge, and shoot down the evil Necromancer once and for all.</p>
-    </li>
-    
-    <li><strong>Theme:</strong>
-    State which of the Storymatic themes you used.
-    <p>N/a</p>
-    </li>
-    
-    <li><strong>Mandated Variety:</strong>
-    State which input, randomness, genre, and play style you used in this prototype.
-    <p>The input for this game is mostly direct and uses the keyboard for the main controls. The game is mostly deterministic, with some randomness from spawning pipes. The play style is a side-scroller and the genre is shooter.
-    </p>
-    </li>
-    
-    <li><strong>Prototype Goal:</strong>
-    What game mechanic is this prototype evaluating?
-    <p>I wanted to experiment different boss phases in a boss fight</p>
-    </li>
-    
-    <li><strong>Player Experience Goals:</strong>
-    What experience do you want players to have when playing your game?
-    <p>I want players to feel pressured by random flying objects that can kill them.</p>
-    </li>
-    
-    <li><strong>Gameplay:</strong>
-    A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
-    <p>
-        Players can only move vertically. Like Flappy Bird, the movement involves "hops" by pressing either the W or SPACE key and gravity will gradually pull them down. Touching the bottom will instantly kill the player, so be careful. The objective of the game is to defeat the Necromancer and not die. To achieve this, the player can shoot fireballs at the boss by pressing J. The boss has 3 different phases, which will add a new challenge the longer the game progresses.
-    </p>
-    <p>
-    </p>
-    </li>
-    
-    <li><strong>Strategies:</strong>
-    What player strategies do you expect will be effective at playing this game?
-    <p>The gravity is actually a bit weak, which makes the character "hover" a slight bit before coming back down. Being able to time each hop enables the player to easily dodge obstacles and projectiles.</p>
-    </li>
-    
-    <li><strong>Story/Setting/Premise:</strong>
-    A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
-    How will the dramatic tension interact with the gameplay tension?
-    <p>
-        With the power stations charged, the Necromancer became afraid and decided to run away. This is your only chance to defeat the Necromancer once and for all. This is an opportunity one must never lose. Apparently, the Necromancer also has some tricks up his sleeves and is willing to use all of it so that he can escape.
-        <p>The scenario for this game coincides with the gameplay because it creates pressure on the player to try and defeat the Necromancer.</p>
-    </p>
-    </li>
-    
-    <li><strong>Target Audience:</strong>
-    A single sentence that describes the demographic you're trying to reach.
-    <p>This game is intended for audiences aged 10 and up</p>
-    </li>
-    
-    <li><strong>Play Time:</strong>
-    How long does your game take to play?
-    <p>This game should take no more than 5 minutes to play</p>
-    </li>
-    
-    </ul>
-    </div>
-  </body>
+<li><strong>Technical Merit:</strong>
+What is interesting about your game technology? / Why I do not like Phaser
+<p>This game is made using the Unity game engine. There are several reasons why I chose not to use Phaser 3. Before I begin, I want to mention that I am spoiled by the convenience of Unity so I am definitely biased against Phaser 3. First, it is extremely difficult to see where I am placing my sprites and game objects. Having to figure out where to place objects through trial and error wastes a lot of my time whereas in Unity I can simply click and drag and know exactly where it is placed. It was also convenient to click and drag audio files onto the Unity interface and have it ready. Second, I was able to easily create groups without having to manually guess and check where to place objects within said group. This is especially apparent when it comes to hitboxes. Thirdly, I felt creatively restricted when using Phaser and I often do not know what I'm looking for because I can't find what I needed. What's frustrating is that many of the examples are outdated and I often spend hours searching for something end up empty-handed. In Unity, there are thousands of Youtube videos on nearly everything and I was able to figure out what I needed fairly quickly. Also, Unity's documentation is much easier to read and follow than Phaser's, they provide examples as to how it should look like. Fourth, I had a much easier time managing colliders and triggers in Unity since Unity has built-in functions that handle that. Phaser does have collision detection, but it is often very confusing and I often lose track of the many objects that interact with each other. Whereas in Unity, I can generalize a specific group of objects by either referring to their tag, or even their name, which is very convenient. Lastly, I was a bit frustrated with the Update() function in Phaser 3, especially when it comes to basic controls. There was a consensus amongst several of my classmates where they had encountered a strange bug where their character will be stuck moving in one direction. There were also complaints of strange interactions with different objects whenever they try to implement physics. The fix in Unity would be to use FixedUpdate(), but I had an extremely difficult time finding the equivalent in Phaser. The same can be said regarding DeltaTime, which enables me to record the relative time for a given event. </p>
+</li>
+
+<li><strong>Prototype Postmortem:</strong>
+What did you learn from this prototype?
+What was the easiest or hardest part of making it?
+<p>The hardest for me was figuring out how to give the boss different phases in the fight. The easiest part was the "hopping" controls for the player. I definitely learned a lot, I discovered that there is a built-in function in Unity that enables objects to orbit around another object.
+</p>
+</li>
+
+<li><strong>Prototype Assets:</strong>
+Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
+<p></p>
+<ul>
+<li>Boss Music: <a href="https://www.youtube.com/watch?v=NzFKyZc_va4">Boss Battle</a></li>
+<li>Parallax Background: <a href="https://www.youtube.com/watch?v=zit45k6CUMk">Background</a></li>
+<li>Wizard: <a href="https://www.pixilart.com/art/pixel-wizard-144103346d5d3aa">Wizard</a></li>
+<li>Object Orbit <a href="https://www.youtube.com/watch?v=3PHc6vEckvc">Orbit</a></li>
+<li>Annoying Dog (Undertale): <a href="https://www.reddit.com/r/Undertale/comments/fkl1fh/an_annoying_dog_appeared/">Dog</a></li>
+<li>Flappy Bird Flap Sound: <a href="https://www.youtube.com/watch?v=vRMFEgaPmTE">Flap</a></li>
+<li>Explosion: <a href="https://www.youtube.com/watch?v=sVqoaO1CezM">Explosion</a></li>
+<li>Explosion Sprite: <a href="https://scratch.mit.edu/discuss/topic/205929/?page=1#post-2072127">Explosion Sprite</a></li>
+
+<p>The rest were from my previous, personal projects.</p>
+</ul>
+</li>
+
+<li><strong>Prototype Closest Other Game:</strong>
+Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<p>
+    This game resembles Flappy Bird with the pipes and controls, but with added twists.
+</p>
+<ul>
+<li>Parallax Background: <a href="https://www.youtube.com/watch?v=zit45k6CUMk">Parallax</a></li>
+<li>Orbit: <a href="https://www.youtube.com/watch?v=3PHc6vEckvc">Orbit</a></li>
+</ul>
+<p>The rest were either made from scratch, pulled from Unity documentation, or pulled from my previous works</p>
+</li>
+
+<li><strong>High Concept:</strong>
+A one-sentence summary of your game.
+<p>Hop, dodge, and shoot down the evil Necromancer once and for all.</p>
+</li>
+
+<li><strong>Theme:</strong>
+State which of the Storymatic themes you used.
+<p>N/a</p>
+</li>
+
+<li><strong>Mandated Variety:</strong>
+State which input, randomness, genre, and play style you used in this prototype.
+<p>The input for this game is mostly direct and uses the keyboard for the main controls. The game is mostly deterministic, with some randomness from spawning pipes. The play style is a side-scroller and the genre is shooter.
+</p>
+</li>
+
+<li><strong>Prototype Goal:</strong>
+What game mechanic is this prototype evaluating?
+<p>I wanted to experiment different boss phases in a boss fight</p>
+</li>
+
+<li><strong>Player Experience Goals:</strong>
+What experience do you want players to have when playing your game?
+<p>I want players to feel pressured by random flying objects that can kill them.</p>
+</li>
+
+<li><strong>Gameplay:</strong>
+A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<p>
+    Players can only move vertically. Like Flappy Bird, the movement involves "hops" by pressing either the W or SPACE key and gravity will gradually pull them down. Touching the bottom will instantly kill the player, so be careful. The objective of the game is to defeat the Necromancer and not die. To achieve this, the player can shoot fireballs at the boss by pressing J. The boss has 3 different phases, which will add a new challenge the longer the game progresses.
+</p>
+<p>
+</p>
+</li>
+
+<li><strong>Strategies:</strong>
+What player strategies do you expect will be effective at playing this game?
+<p>The gravity is actually a bit weak, which makes the character "hover" a slight bit before coming back down. Being able to time each hop enables the player to easily dodge obstacles and projectiles.</p>
+</li>
+
+<li><strong>Story/Setting/Premise:</strong>
+A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
+How will the dramatic tension interact with the gameplay tension?
+<p>
+    With the power stations charged, the Necromancer became afraid and decided to run away. This is your only chance to defeat the Necromancer once and for all. This is an opportunity one must never lose. Apparently, the Necromancer also has some tricks up his sleeves and is willing to use all of it so that he can escape.
+    <p>The scenario for this game coincides with the gameplay because it creates pressure on the player to try and defeat the Necromancer.</p>
+</p>
+</li>
+
+<li><strong>Target Audience:</strong>
+A single sentence that describes the demographic you're trying to reach.
+<p>This game is intended for audiences aged 10 and up</p>
+</li>
+
+<li><strong>Play Time:</strong>
+How long does your game take to play?
+<p>This game should take no more than 5 minutes to play</p>
+</li>
+
+</ul>
+</div>
+
+</body>
 </html>
