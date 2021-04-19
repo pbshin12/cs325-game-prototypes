@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Analog Assign 4 Iteration Seq 2</title>
+<title>Analog Assign 5 Iteration Seq 1</title>
 <style>
 body
 {
@@ -24,12 +24,12 @@ body
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
-<p>This game was inspired by the traditional Korean board game called "Yutnori" which involves taking your pieces around the board and make it back to the start point (kind of like baseball). However, I took it upon myself to interpret the story behind it and made each station like a charging station. Which, afterwards, inspired me to make this game about a wizard who charges a magical station to defeat a villian. I also wanted to make an arcade-like game, so I tried to make it seem like a typical arcade game. </p>
+<p>This game was originally intended to be a BulletHell, but then it evolved into a modified version of Flappy Bird and I stuck with it. </p>
 </li>
 
 <li><strong>Technical Merit:</strong>
-What is interesting about your game technology?
-<p>A lot of objects were used in the making of this project. Each station in the game is its own individual object where you can retrieve certain data such as their charge percentage, colliders, and other data. I had also experimented with scene transition and managed to produce a tutorial scene, that way I do not have to explain to my classmates the instructions.</p>
+What is interesting about your game technology? / Why I do not like Phaser
+<p>This game is made using the Unity game engine. There are several reasons why I chose not to use Phaser 3. The first being that it is extremely difficult to see where I am placing my sprites and game objects. Having to figure out where to place objects through trial and error wastes a lot of my time whereas in Unity I can simply click and drag and know exactly where it is placed. Second, I was able to easily create groups without having to manually guess and check where to place objects within said group. This is especially apparent when it comes to hitboxes. Thirdly, I felt creatively restricted when using Phaser and I often do not know what I'm looking for because I can't find what I needed. What's frustrating is that many of the examples are outdated and I often spend hours searching for something end up empty-handed. In Unity, there are thousands of Youtube videos on nearly everything and I was able to figure out what I needed fairly quickly. Also, Unity's documentation is much easier to read and follow than Phaser's, they provide examples as to how it should look like. Fourth, I had a much easier time managing colliders and triggers in Unity since Unity has built-in functions that handle that. Phaser does have collision detection, but it is often very confusing and I often lose track of the many objects that interact with each other. Whereas in Unity, I can generalize a specific group of objects by either referring to their tag, or even their name, which is very convenient. Lastly, I was a bit frustrated with the Update() function in Phaser 3, especially when it comes to basic controls. There was a consensus amongst several of my classmates where they had encountered a strange bug where their character will be stuck moving in one direction. There were also complaints of strange interactions with different objects whenever they try to implement physics. The fix in Unity would be to use FixedUpdate(), but I had an extremely difficult time finding the equivalent in Phaser. The same can be said regarding DeltaTime, which enables me to record the relative time for a given event. </p>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
