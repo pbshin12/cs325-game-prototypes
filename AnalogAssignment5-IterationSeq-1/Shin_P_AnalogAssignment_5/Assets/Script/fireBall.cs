@@ -9,7 +9,7 @@ public class fireBall : MonoBehaviour
     public AudioClip bossHurtSound;
 
     public float projectileSpeed = 20f;
-    public int damage = 20;
+    public int damage = 10;
     public Rigidbody2D rb;
     
     // Start is called before the first frame update
@@ -36,7 +36,14 @@ public class fireBall : MonoBehaviour
             //TODO --> deal damage to enemy/boss
             AudioSource.PlayClipAtPoint(bossHurtSound, new Vector3(0, 0, -10));
             GameManager.bossHealth -= damage;
-            Debug.Log("Boss health is now at: " + GameManager.bossHealth);
+            //Debug.Log("Boss health is now at: " + GameManager.bossHealth);
+        }
+
+        if (collision.gameObject.tag == "Minion")
+        {
+            Debug.Log("WE HIT A MINIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOON");
+            Enemy minion = collision.GetComponent<Enemy>();
+            minion.DamageEnemy(damage);
         }
 
         Destroy(gameObject);

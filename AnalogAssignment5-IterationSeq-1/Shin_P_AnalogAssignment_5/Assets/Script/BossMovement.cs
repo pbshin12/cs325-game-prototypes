@@ -43,7 +43,7 @@ public class BossMovement : MonoBehaviour
         }
 
         //Debug.Log(transform.position.y);
-        if (timer >= timeBetweenAttacks)
+        if (timer >= timeBetweenAttacks && GameManager.playerAlive)
         {
             fire();
             timer = 0;

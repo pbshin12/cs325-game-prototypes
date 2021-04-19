@@ -7,6 +7,8 @@ TagManager:
   - ScoreBox
   - Laser
   - FireBall
+  - Pipe
+  - Minion
   layers:
   - Default
   - TransparentFX

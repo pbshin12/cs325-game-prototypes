@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float timeBetweenSpawn = 1.0f; /* Spawning pipe obstacle */
+    public float timeBetweenSpawn = 4.0f; /* Spawning pipe obstacle */
     private float timer = 0f;
 
     public static int phase = 1;
@@ -20,6 +20,15 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public Transform spawnPoint;
 
+    public GameObject pipePrefab;
+    private int incrementCounter = 0;
+    private float speed = -5f;
+
+    public GameObject solidGround;
+    public Transform solidGroundSpawn;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +41,15 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
         
-        if (timer >= timeBetweenSpawn && phase == 2)
+        if (GameManager.playerAlive && GameManager.bossAlive)
         {
-            spawnPipe();
-            timer = 0;
+            if (timer >= timeBetweenSpawn && phase >= 2)
+            {
+                spawnPipe();
+                timer = 0;
+            }
         }
+        
 
         /* 
          * There will be 3 phases in the bossfight:
@@ -54,10 +67,19 @@ public class GameManager : MonoBehaviour
             phase = 2;
         }
 
-       if (bossHealth == 1000)
+       if (bossHealth <= 1000)
         {
             Debug.Log("FINAL Phase intiated");
+            this.timeBetweenSpawn = 1.5f;
+            if (speed <= -7f)
+            {
+                speed -= 0.05f;
+                PipeSpeed.pipeSpeed = new Vector2(speed, 0);
+                incrementCounter++;
+            }
+            
             phase = 3;
+            timeBetweenSpawn = 2.0f;
         }
 
        if (!playerAlive && !this.explosionPlayed)
@@ -72,13 +94,26 @@ public class GameManager : MonoBehaviour
             Debug.Log("BOSS DIED");
             audioSource.PlayOneShot(explosion, 0.8f);
             this.explosionPlayed = true;
+            Instantiate(solidGround, solidGroundSpawn.position, Quaternion.identity);
         }
 
 
     }
 
+    /* Will either spawn pipes on top or at the bottom, randomly */
     void spawnPipe()
     {
+        float randomVal = Random.Range(0f, 1f) * 100;
+        Debug.Log("\tSPAWN PIPE HOIIIIIIIIIIIIIIIIII " + randomVal);
+        /* Bottom pipe */
+        if (randomVal <= 49f)
+        {
+            Instantiate(pipePrefab, new Vector3(10, Random.Range(-7f, -4.5f), 0), Quaternion.Euler(0, 0, 180));
+        }
+        else
+        {
+            Instantiate(pipePrefab, new Vector3(10, Random.Range(3.5f, 6.0f), 0), Quaternion.identity);
+        }
         
     }
 }

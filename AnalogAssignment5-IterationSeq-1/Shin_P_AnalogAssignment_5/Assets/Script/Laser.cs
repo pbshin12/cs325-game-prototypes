@@ -22,11 +22,11 @@ public class Laser : MonoBehaviour
     /* Do something if laser collides with an enemy */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collided with: " + collision.name);
+        //Debug.Log("Collided with: " + collision.name);
 
-        if (collision.name == "skeletonSoldier" || collision.gameObject.tag == "FireBall")
+        if (collision.name == "skeletonSoldier" || collision.gameObject.tag == "FireBall" || collision.gameObject.tag == "Pipe" || collision.gameObject.tag == "Minion")
         {
-            Debug.Log("Laser hitting each other");
+            //Debug.Log("Laser hitting each other");
             return;
         }
 
@@ -34,7 +34,7 @@ public class Laser : MonoBehaviour
         {
             //TODO --> deal damage to player
             GameManager.playerHealth -= 1;
-            Debug.Log("Player health is now at: " + GameManager.bossHealth);
+            //Debug.Log("Player health is now at: " + GameManager.bossHealth);
             AudioSource.PlayClipAtPoint(playerOOFSound, new Vector3(0, 0, -10));
             AudioSource.PlayClipAtPoint(playerHurtSound, new Vector3(0, 0, -10));
         }
